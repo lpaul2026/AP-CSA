@@ -1,0 +1,81 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.numberformatassignment;
+import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
+/**
+ *
+ * @author LPaul2026
+ */
+public class NumberFormatAssignment {
+
+    public static void main(String[] args) {
+        //define scanner to get user input
+        Scanner scan = new Scanner(System.in);
+        //ASSIGNMENT ONE: Percent Girls/Boys
+        //define the percentage format
+        NumberFormat fmt1 = NumberFormat.getPercentInstance();
+        //print out the prompt for the user
+        System.out.println("How many total students at the school?");
+        //allow user to input amount of students at the school
+        double totalStudents = scan.nextDouble();
+        //print out the prompt for the user
+        System.out.println("How many girls at the school?");
+        //allow user to input amount of girls at the school
+        double totalGirls = scan.nextDouble();
+        //define the percent of girls as the number of girls divided by the total amount of students
+        double percentGirls = totalGirls/totalStudents;
+        //calculate the number of boys by subtracting number of girls from the total
+        double totalBoys = totalStudents - totalGirls;
+        //define the percent of boys as the number of boys divided by the total amount of students
+        double percentBoys = totalBoys/totalStudents;
+        //print out the results in percentage form
+        System.out.println("Percent of girls: " + fmt1.format(percentGirls));
+        System.out.println("Percent of boys: " + fmt1.format(percentBoys));
+        //ASSIGNMENT TWO: Dollars to Pounds to Euros
+        //set format 2 as the currency of the UK
+        NumberFormat fmt2 = NumberFormat.getCurrencyInstance(Locale.UK);
+        //set format 3 as the currency of Germany (euros)
+        NumberFormat fmt3 = NumberFormat.getCurrencyInstance(Locale.GERMANY);
+        //print out user prompt
+        System.out.println("Amount of money in dollars and cents: ");
+        //allow input of US money amount from user
+        double amountDollars = scan.nextDouble();
+        //define the amount of pounds as .75 of the dollar money amount
+        double amountPounds = .7500 * amountDollars;
+        //define the amount of euros as .86 of the dollar money amount
+        double amountEuros = .8600 * amountDollars;
+        //print out the results in their respective formats
+        System.out.println("The amount in pounds is: " + fmt2.format(amountPounds));
+        System.out.println("The amount in euros is: " + fmt3.format(amountEuros));
+        //ASSIGNMENT THREE: Pi Decimals
+        //print out prompt for user
+        System.out.println("Provide a random integer:");
+        //allow user to input random integer
+        int randomInteger = scan.nextInt();
+        //define the double pi as the mathematical value of pi
+        double pi = Math.PI;
+        //print the result, rounded to the amount of places determined by the user
+        System.out.println("The value of pi rounded to the given number of decimal places is: " + roundAvoid(pi, randomInteger));
+        //ASSIGNMENT FOUR: Random Large Number
+        //define new random generator
+        Random random = new Random();
+        //set the random large number equal to a randomly generated double from 100,000,000 - 999e18
+        double randomLargeNumber = random.nextDouble(9.99e20) + 100000000;
+        //print out the result in long format
+        System.out.println((long)randomLargeNumber);
+        
+        
+    }
+    //roundAvoid to call in previous method when rounding a number
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        //define the math function for rounding
+        return Math.round(value * scale) / scale;
+    }
+}
