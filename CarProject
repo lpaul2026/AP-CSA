@@ -1,0 +1,57 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+
+/*1) What is the difference between a class and an object?
+	The difference between a class and an object is that a class is a blueprint or a definition for creating objects, many of which can be contained in one single class. More specifically, a class defines the properties and behaviors of all the objects it contains, and objects are entities that have distinct attributes, methods, and identities and store data.
+2) What happens when you pass an object to a print or println method?
+	When you pass an object to a print or println method, the value of the object is relayed into the output stream. The println method specifically adds an empty line between the printed object and whatever comes next.
+3) What is the scope of a variable in a method? In a class?
+	The scope of a variable is the area in a program where that data can be referenced. In a method, the scope is very constricted and the data cannot be referenced outside the method; hence, the description local. In a class, the scope of the variable is anywhere within that class.
+4) Carry out the following programming project. */
+
+package com.mycompany.carproject;
+import java.text.NumberFormat;
+
+/**
+ *
+ * @author LPaul2026
+ */
+public class CarProject {
+
+    
+    public static void main(String[] args) {
+        Car toyotaPrius = new Car("Toyota", 196, 112.0, 26477.00);
+        Car vwBug = new Car("Volks Wagon", 174, 120.0, 34990.00);
+        Car bmwI8 = new Car("BMW", 369, 155.0, 74398.00);
+        Car teslaModel3 = new Car("Tesla", 510, 163.0, 44130.00);
+        System.out.println(toyotaPrius);
+        System.out.println(vwBug);
+        System.out.println(bmwI8);
+        System.out.println(teslaModel3);
+    }
+}
+
+class Car{
+    private String carBrand;
+    private int enginePower;
+    private double maxSpeed;
+    private double price;
+    NumberFormat fmt1 = NumberFormat.getCurrencyInstance();    
+    
+    public Car(String inBrand, int inEnginePower, double inMaxSpeed, double inPrice){
+        carBrand = inBrand;
+        enginePower = inEnginePower;
+        maxSpeed = inMaxSpeed;
+        price = inPrice;
+    }
+        
+    public String toString(){
+        String brandString = "The Car Brand is: " + carBrand;
+        String enginePowerString = "\n The Horsepower of the Car is: " + enginePower + "hp";
+        String maxSpeedString = "\n The Max Speed of the Car is: " + maxSpeed + " mph";
+        String priceString = "\n The Price of the Car is: " + fmt1.format(price);
+        return brandString + enginePowerString + maxSpeedString + priceString;
+    }
+}
