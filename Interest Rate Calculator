@@ -1,0 +1,72 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.interestrate;
+import java.util.Scanner;
+import java.text.NumberFormat;
+//import java.text.DecimalFormat;
+
+/**
+ *
+ * @author LPaul2026
+ */
+public class InterestRate {
+    public static void main(String[] args) {
+        //creating a new scanner object to obtain user input later
+        Scanner scan = new Scanner(System.in);
+        //setting fmt1 to be the currency of the US
+        NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
+        //printing out prompt for user to enter a financial amount
+        System.out.println("Enter a financial amount.");
+        //obtaining user's financial amount and storing it in a double variable
+        double financialAmount = scan.nextDouble();
+        //printing out prompt for user to enter months for repaying
+        System.out.println("How many months for repayment?");
+        //obtaining user's month number and storing it in an int variable
+        int monthNumber = scan.nextInt();
+        //setting a new money variable that has the properties of the InterestRateCalculator class
+        //financialAmount and monthNumber are shared with the InterestRateCalculator class
+        InterestRateCalculator money = new InterestRateCalculator(financialAmount, monthNumber);
+        //calling the CalcualtingOverallPayment method from the InterestRateCalculator class to apply the instructions contained to money, and print it out with the currency format
+        //this is the overall amount to be repaid
+        System.out.println("The total amount of money to be paid out over " + monthNumber + " months is " + fmt1.format(money.CalculatingOverallPayment()));
+        //calling the CalcualtingInterest method from the InterestRateCalculator class to apply the instructions contained to money, and print it out with the currency format
+        //this is the monthly amount to be repaid
+        System.out.println("The amount of money to pay this month is " + fmt1.format(money.CalculatingInterest()));
+    }
+}
+
+//creating a new class
+class InterestRateCalculator {
+    //setting a constant interest rate
+    public final double rate = .05;
+    //setting various variables to be used in later methods
+    private final double input;
+    private double monthPayment;    
+    private double overallPayment;
+    private final int months;
+    
+    //creating a public method to take in info from the InterestRate class
+    InterestRateCalculator(double inInput, int inMonths) {
+        //setting the double variable input as the financialAmount from the InterestRate class
+        input = inInput;
+        //setting the double variable months as the monthNumber from the InterestRate class
+        months = inMonths;
+    }
+    //creating a public method to calculate the overall amount to be paid
+    public double CalculatingOverallPayment(){
+        //setting the overall payment as the inputted financial amount with interest (rate + 1 = 1.05)
+        overallPayment = input * (rate + 1);
+        //returning the overallPayment value from this method
+        return overallPayment;
+    }
+    //creating a public method to calculate the monthly amount to be paid
+    public double CalculatingInterest(){
+        //setting the monthly payment as the overall amount (amount+interest) divided by the number of months to repay
+        monthPayment = overallPayment/months;
+        //returning the monthPayment value from this method
+        return monthPayment;
+    }
+
+}
