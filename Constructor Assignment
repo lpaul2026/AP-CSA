@@ -1,0 +1,81 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.coursedetails;
+
+
+/**
+ *
+ * @author LPaul2026
+ */
+public class CourseDetails {
+
+    public static void main(String[] args) {
+        //creating a course variable that is called by the Course class and constructor
+        Course classOne = new Course("Computer Science", "AP CS A", 91, "Mr. Nelson");
+        //creating another course variable that is called by the Course class and constructor
+        Course classTwo = new Course("Religion");
+        //setting the different qualities of Class Two by calling the relevant methods in the Course class
+        classTwo.setCourseCode("CAT INNO 11");
+        classTwo.setPointsTotal(90);
+        classTwo.setInstructorName("Mr. Frice");
+        //creating a course variable that is called by the Course class and constructor
+        Course classThree = new Course("Engineering", "STEAM CAP", 92, "Mr. Knoll");
+        //creating another course variable that is called by the Course class and constructor
+        Course classFour = new Course("Physics");
+        //setting the different qualities of Class Two by calling the relevant methods in the Course class
+        classFour.setCourseCode("AP PHYS C");
+        classFour.setPointsTotal(93);
+        classFour.setInstructorName("Mrs. Rafie");
+        //printing out the classes (refers to toString method in Course class)
+        System.out.println(classOne);
+        System.out.println(classTwo);
+        System.out.println(classThree);
+        System.out.println(classFour);
+    }
+}
+
+class Course{
+    //creating private instances of variables
+    private final String courseTitle;
+    private String courseCode;
+    private int pointsTotal;
+    private String instructorName;
+    //creating a constructor that calls an object in CourseDetails with the given parameters
+    public Course(String getCourseTitle, String getCourseCode, int getPointsTotal, String getInstructorName){
+        //set the class variables as the data taken from the CourseDetails class
+        courseTitle = getCourseTitle;
+        courseCode = getCourseCode;
+        pointsTotal = getPointsTotal;
+        instructorName = getInstructorName;
+    }
+    //creating a constructor that calls an object in CourseDetails with just the course title given
+    public Course(String getCourseTitle){
+        //set the courseTitle variable as the data taken from the CourseDetails class
+        courseTitle = getCourseTitle;
+    }
+    //creaing a method that sets the course code of the course from CourseDetails
+    public void setCourseCode(String inCode){
+        courseCode = inCode;
+    }
+    //creaing a method that sets the total points of the course from CourseDetails
+    public void setPointsTotal(int inPointsTotal){
+        pointsTotal = inPointsTotal;
+    }
+    //creaing a method that sets the inastructor name of the course from CourseDetails
+    public void setInstructorName(String inName){
+        instructorName = inName;
+    }
+
+    public String toString(){
+        //creating a string with each variable plus the requreid text
+        String courseTitleString = "The name of the course is " + courseTitle + ".";
+        String courseCodeString = " The code of the course is " + courseCode + ".";
+        String pointsTotalString = " The point total of the course is " + pointsTotal + ".";
+        String instructorNameString = " The name of the course instructor is " + instructorName + ".";
+        //outputting the strings combined
+        return courseTitleString + courseCodeString + pointsTotalString + instructorNameString;
+    }
+
+}
