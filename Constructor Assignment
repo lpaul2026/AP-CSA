@@ -69,7 +69,7 @@ class Course{
     }
 
     public String toString(){
-        //creating a string with each variable plus the requreid text
+        //creating a string with each variable plus the required text
         String courseTitleString = "The name of the course is " + courseTitle + ".";
         String courseCodeString = " The code of the course is " + courseCode + ".";
         String pointsTotalString = " The point total of the course is " + pointsTotal + ".";
