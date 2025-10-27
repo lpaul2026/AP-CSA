@@ -1,0 +1,49 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.leapyearssolution;
+//import the scanner class for use later
+import java.util.Scanner;
+
+/**
+ *
+ * @author LPaul2026
+ */
+public class LeapYearsSolution {
+
+    public static void main(String[] args) {
+        //create a new scanner object
+        Scanner scan = new Scanner(System.in);
+        //print out the prompt for users to input year
+        System.out.println("Enter a year since 1582:");
+        //set the year variable equal to the integer users input
+        int year = scan.nextInt();
+        //create a boolean isLeapYear, and set it to false by default
+        boolean isLeapYear = false;
+        //create a Minimum value for the year
+        int MIN = 1582;
+        //create an if statement so that if the year is less than 1582, the prgram is terminated
+        if(year < MIN){
+            //print out error message for user
+            System.out.println("ERROR. THE YEAR INPUTTED IS BEFORE 1582! LEAP YEAR STATUS CANNOT BE CALCULATED!");
+        }
+        //if the year is not before 1582, the program will continue as follows
+        else{
+            //if the year is (divisible by 4 AND not divisible by 100) OR (divisible by 100 AND divisible by 400)
+            if(((year % 4 == 0) && (year % 100 != 0)) || ((year % 100 == 0) && (year % 400 == 0))){
+                //if the year fits the requirements above, then the boolean leap year is true
+                isLeapYear = true;
+                //print out that the year is a leap year for user
+                System.out.println(year + " is a Leap Year!");
+            }
+            //if the year does not meet the requirements above, then the following code is run
+            else{
+                //the boolean leap year is false
+                isLeapYear = false;
+                //print out that the year is not a leap year for the user
+                System.out.println(year + " is not a Leap year :( ");
+            }
+        }
+    }
+}
