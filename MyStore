@@ -1,0 +1,154 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.mystore;
+import java.util.Scanner;
+import java.text.NumberFormat;
+/**
+ *
+ * @author LPaul2026
+ */
+public class MyStore {
+
+    public static void main(String[] args) {
+        //creating a new scanner object
+        Scanner scan = new Scanner(System.in);
+        //creating a format for currency
+        NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
+        //creating a Maximum budget of $250
+        final double MAX_BUDGET = 250.00;
+        //creating new Item items and setting their prices using the Item class below
+        Item tShirt = new Item("Shirt");
+        tShirt.setItemPrice(29.99);
+        Item shoes = new Item("Shoes");
+        shoes.setItemPrice(125.99);
+        Item jeans = new Item("Jeans");
+        jeans.setItemPrice(60.99);
+        Item jacket = new Item("Jacket");
+        jacket.setItemPrice(250.00);
+        Item hat = new Item("Hat");
+        hat.setItemPrice(25.99);
+        Item shorts = new Item("Shorts");
+        shorts.setItemPrice(29.99);
+        Item blouse = new Item("Blouse");
+        blouse.setItemPrice(125.99);
+        //setting the bill to 0 initially
+        double bill = 0;
+        //setting the item count to 0 initially
+        int itemCount = 0;
+        //printing the info of each item through the to String method in the Item class
+        System.out.println(tShirt);
+        System.out.println(shoes);
+        System.out.println(jeans);
+        System.out.println(jacket);
+        System.out.println(hat);
+        System.out.println(shorts);
+        System.out.println(blouse); 
+        //create a loop while the bill is under the max budget
+        while(bill < MAX_BUDGET){
+            //print out the prompt for the user
+            System.out.println("Pick which item to buy!");
+            //get the user input
+            String item = scan.next();
+            //create a condition for when the user input is the same as the name of the tShirt
+            if(item.equals(tShirt.GetName())){ //|| item.equals(shoes) || item.equals(jeans) || item.equals(jacket) || item.equals(hat) || item.equals(blouse)) {
+                //print out that the t shirt was successfully added
+                System.out.println("T-Shirt added to cart");
+                //add the price of the shirt to the bill
+                bill = bill + tShirt.GetPrice();
+                //add 1 to the item count
+                itemCount = itemCount + 1;
+                //print out the price info
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                //print out number of items in the cart
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            //repeating the process above for the rest of the items
+            else if (item.equals(shoes.GetName())){
+                System.out.println("Shoes added to cart");
+                bill = bill + shoes.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            else if (item.equals(jeans.GetName())){
+                System.out.println("Jeans added to cart");
+                bill = bill + jeans.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            else if (item.equals(jacket.GetName())){
+                System.out.println("Jacket added to cart");
+                bill = bill + jacket.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            else if (item.equals(hat.GetName())){
+                System.out.println("Hat added to cart");
+                bill = bill + hat.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            else if (item.equals(shorts.GetName())){
+                System.out.println("Shorts added to cart");
+                bill = bill + shorts.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+            else if (item.equals(blouse.GetName())){
+                System.out.println("Blouse added to cart");
+                bill = bill + blouse.GetPrice();
+                itemCount = itemCount + 1;
+                System.out.println("Your current bill is: " + fmt1.format(bill));
+                System.out.println("You currently have " + itemCount + " items in your cart.");
+            }
+        }
+        //warning message if the bill gets over the budget
+        if(bill > MAX_BUDGET){
+            System.out.println("YOU ARE OVERBUDGET");
+        }
+    }
+}
+
+
+class Item {
+    //creating private variables for this class
+    private String strName;
+    private double dblPrice;
+    private double bill;
+    //creating a format for currency
+    NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
+    
+    //creatung a method that gets the item's name
+    public Item(String inStrName){
+        strName = inStrName;
+    }
+    
+    //creating a method that sets the item's price
+    public void setItemPrice(double inDblPrice){
+        dblPrice = inDblPrice;
+    }
+    
+    //creating a method that gets the item's name
+    public String GetName(){
+        return strName;
+    }
+    
+    //creating a method that gets the item's price
+    public double GetPrice(){
+        return dblPrice;
+    }
+    
+    //creating a toString method that prints the item's name and price
+    public String toString(){
+        //creating a string with each variable plus the required text
+        String strNameString = "The name of the item is " + strName + ".";
+        String dblPriceString = " The price of the item is " + fmt1.format(dblPrice) + ".";
+        return strNameString + dblPriceString;
+    }
+}
