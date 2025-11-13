@@ -1,0 +1,85 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.shoppinglist;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author LPaul2026
+ */
+public class ShoppingList {
+
+    public static void main(String[] args) {
+        //creating a new scanner object
+        Scanner scan = new Scanner(System.in);
+        //creating an empty array list named list
+        ArrayList<String> list = new ArrayList<String>();
+        //creating boolean for while loop
+        boolean notDone = true;
+        //defining the integer iteration at 0 for use later
+        int iteration = 0;
+         //defining the integer newIteration at 0 for use later
+        int newIteration = 0;
+        //printing out prompt for user
+        System.out.println("Add your shopping list items here: ");
+        //creating a while loop
+        while(notDone == true){
+            //adding user's item to shopping list
+            list.add(scan.next());
+            //printing prompt for if user wants to continue
+            System.out.println("Do you want to continue adding items? yes/no");
+            //creating state string that is user's input
+            String state = scan.next();
+            //if condition if user wants to continue adding items
+            if(state.equals("yes")){
+                //prompt for user to add more items
+                System.out.println("Enter more items here: ");
+                //boolean is set to true, while loop goes through next iteration
+                notDone = true;
+            }
+            //if the user put in no, the while loop terminates
+            else if(state.equals("no")){
+                System.out.println("Shopping list being generated...");
+                notDone = false;
+            }
+            //if the user put in something other than yes or no, the loop is terminated and error message is printed
+            else{
+                System.out.println("Error. Terminating shopping list");
+                notDone = false;
+            }
+        }
+        //while loop for when the number iteration is less than the magnitude of the list
+        while(iteration < list.size()){
+            //printing the list plus indices plus one to print a more user friendly way to see the items and their number. the printed list will start at 1 and not 0
+            System.out.println((iteration + 1) + ". " + list.get(iteration));
+            //increasing the iteration by one and restarting the loop if the iteration is still smaller than the size of the list
+            iteration++;
+        }
+        //printing prompt for user
+        System.out.println("Do you want to remove any items from the list? yes/no");
+        //creating a string response that contains user's input
+        String response = scan.next();
+        //if statement for if the user wants to remove Item
+        if(response.equals("yes")){
+            //printing prompt for user
+            System.out.println("Which item would you like to remove? Provide the number");
+            //creating an integer that is the user's input of which number they want to remove
+            int removedItem = scan.nextInt();
+            //clearing the space
+            scan.nextLine();
+            //removing the item at the index *minus one* chosen by the user because they put the number as seen on the list formatted for user friendliness
+            list.remove(removedItem - 1);
+            System.out.println("New shopping list being generated...");
+            //redoing the while loop to print the edited list and each item's index
+            while(newIteration < list.size()){
+                System.out.println((newIteration + 1) + ". " + list.get(newIteration));
+                newIteration++;
+            }
+        }
+        //printing out goodbye message
+        System.out.println("Thank you for using this service!");
+    }
+}
