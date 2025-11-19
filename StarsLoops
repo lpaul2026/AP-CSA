@@ -1,0 +1,74 @@
+public class StarsLoops {
+
+    public static void main(String[] args) {
+//-----------------------------------------------------------------
+// This code prints different triangle and diamond shapes using asterisks.
+//-----------------------------------------------------------------
+//define a set integer that has the number of rows in each triangle
+        final int MAX_ROWS = 10;
+        //print out distinguishing letter
+        System.out.println("a.");
+        //for loop for getting the correct number of rows and running the code for that long
+        //this loop prints an inverted triangle
+        for (int aRow = MAX_ROWS; aRow >= 1; aRow--) {
+            //printing out the stars in a for loop
+            for (int aStar = 1; aStar <= aRow; aStar++) {
+                System.out.print("*");
+            }
+            //adding a new line
+        System.out.println();
+        }
+        //this next loop prints out a rightleaning triangle
+        System.out.println("b.");
+        for (int bRow = 1; bRow <= MAX_ROWS; bRow++) {
+            //making a loop for how many spaces go before the stars on each row
+            for (int bSpace = 1; bSpace <= (MAX_ROWS - bRow); bSpace++) {
+                System.out.print(" ");
+            }
+            //making a loop for the number of stars on each level 
+            for (int bStar = 1; bStar <= bRow; bStar++) {
+                    System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        //this loop prints out an inverted, right leaning triangle
+        System.out.println("c.");
+        //uses same process of spaces and stars as part b
+        for (int cRow = MAX_ROWS; cRow >= 1; cRow--) {
+            for (int cSpace = 1; cSpace <= (MAX_ROWS - cRow); cSpace++) {
+                System.out.print(" ");
+            }
+            for (int cStar = 0; cStar < cRow; cStar++) {
+                    System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        //the next loop creates a diamond. before that, I need to create a final integer with half of the height of the diamond
+        final int diamondSize = 5;
+        
+        System.out.println("d.");
+        //creating a loop for the upper half of the diamond
+        for (int d1Row = 1; d1Row <= diamondSize; d1Row++) {
+            for (int d1Space = 1; d1Space <= (diamondSize - d1Row); d1Space++) {
+                System.out.print(" ");
+            }
+            for (int d1Star = 1; d1Star <= ((2 * d1Row) - 1); d1Star++) {
+                    System.out.print("*");
+            }
+            System.out.println();
+        }
+        //creating a loop for the lower half of the diamond
+        for (int d2Row = diamondSize; d2Row >= 1; d2Row--) {
+            for (int d2Space = 1; d2Space <= (diamondSize - d2Row); d2Space++) {
+                System.out.print(" ");
+            }
+            for (int d2Star = 1; d2Star <= ((2 * d2Row) - 1); d2Star++) {
+                    System.out.print("*");
+            }
+            System.out.println();
+        }
+
+    }
+}
