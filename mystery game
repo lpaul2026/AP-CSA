@@ -1,0 +1,99 @@
+package com.mycompany.mysterygame;
+import java.util.Scanner;
+import java.util.ArrayList;
+/**
+ *
+ * @author LPaul2026
+ */
+public class MysteryGame {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String playerChoice;
+        System.out.println("Welcome to the game of Mystery!");
+        String player1 = "detective";
+        String player2 = "suspect";
+        String player3 = "bystander";
+        String player4 = "victim";
+//        enum CrimeType {murder, theft, fraud, arson}
+//        System.out.println("Choose the type of crime.");        
+        System.out.println("Your choices to play are: ");
+        System.out.println("Detective. To choose this character, press 1");
+        System.out.println("Suspect. To choose this character, press 2");
+        System.out.println("Bystander. To choose this character, press 3");
+        System.out.println("Victim. To choose this character, press 4");
+        String input = scan.nextLine();
+        ArrayList<String> validChoices = new ArrayList<>();
+        validChoices.add("1");
+        validChoices.add("2");
+        validChoices.add("3");
+        validChoices.add("4");
+        while(!validChoices.contains(input)){
+            System.out.println("You have entered an invalid character. Please select 1, 2, 3, or 4 to continue the game.");
+            input = scan.next();
+        }
+        switch(input) {
+            case "1":
+                playerChoice = player1;
+                break;
+            case "2":
+                playerChoice = player2;
+                break;
+            case "3":
+                playerChoice = player3;
+                break;
+            case "4":
+                playerChoice = player4;
+                break;
+            default:
+                playerChoice = player1;
+        }
+        enum CrimeType {murder, theft, fraud, arson}
+        System.out.println("You have chosen " + playerChoice);
+        if (playerChoice.equals(player1)){
+            Detective Game = new Detective();
+        }
+        else if (playerChoice.equals(player2)){
+            System.out.println("You hear the doorbell ring. ");
+        }
+    }
+}
+
+class Detective{
+    public Detective(){
+        System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice appears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
+        System.out.println("When you arrive on the scene, you see: ");
+        Victim MrSmith = new Victim("John Smith", 75, "A financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of enemies.", "death by posioning");
+        Suspect WIFE = new Suspect("NAME", 25, "Mr. XXXX's young wife");
+        Suspect SON = new Suspect("NAME", 20, "Mr. XXXX's son from a previous marriage");
+        Suspect MAID = new Suspect("NAME", 77, "The elderly maid");
+        Suspect MOTHER = new Suspect("NAME", 99, "Mr. XXXX's ancient mother");
+        Suspect BROTHER= new Suspect("NAME", 68, "Mr. XXXX's younger brother");
+//        String fact1 = "5 people live in the house: an elder";
+    }
+    
+}
+
+class Victim{
+    private String name;
+    private int age;
+    private String description;
+    private String mannerOfDeath;
+    public Victim(String inName, int inAge, String inDesc, String inManner){
+        name = inName;
+        age = inAge;
+        description = inDesc;
+        mannerOfDeath = inManner;
+    }
+}
+
+class Suspect{
+    private String name;
+    private int age;
+    private String description;
+    public Suspect(String inName, int inAge, String inDesc){
+        name = inName;
+        age = inAge;
+        description = inDesc;
+    }
+}
