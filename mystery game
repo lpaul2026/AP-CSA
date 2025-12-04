@@ -61,15 +61,37 @@ public class MysteryGame {
 
 class Detective{
     public Detective(){
+        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of enemies.", "death by posioning");
+        ArrayList<String> suspects = new ArrayList<>();
+        Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife", "Was out watching a movie the entire evening.");
+        Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage", "Was playing video games with his friend in his room all night.");
+        Suspect cook = new Suspect("Edith", 77, "The elderly cook", "No alibi. Was home when murder ocurred.");
+        Suspect mother = new Suspect("Genevieve", 99, "Mr. Beauregard's ancient mother", "No alibi. Was home when murder ocurred.");
+        Suspect brother = new Suspect("Winston", 68, "Mr. Beauregard's younger brother", "No alibi. Was home when murder ocurred.");
+        suspects.add(wife.GetName());
+        suspects.add(son.GetName());
+        suspects.add(cook.GetName());
+        suspects.add(mother.GetName());
+        suspects.add(brother.GetName());
+        Witness gardener = new Witness("Jimmy", 3, "witnessed Edith preparing the meal without adding anything out of the ordinary", "family gardener");
+        Witness friend = new Witness("Joshua", 1, "saw Joanna sneakily dumping something into the bushes behind the house. Also, that Benjamin didn't leave his room at all when they were playing video games together", "Benjamin's childhood friend and neighbor");
+        Witness passerby = new Witness("David", 4, "heard two male voices arguing loudly the night before the murder", "stranger who was walking by the house");
+        String fact1 = "The poison was in Mr. Beauregard's dinner, which he ate at 5:30. Genevieve and Winston ate dinner with him and did not get sick.";
+        String fact2 = "The house has a security guard who swears no one else could have entered the house at the time of the murder. All the doors and windows were locked";
+        String fact3 = "Edith finished preparing dinner at 5. The food was on the table at 5:15. Each person's food was in a different plate.";
+        String hint1 = "One of the alibis are not true";
+        String hint2 = "The food could only be poisoned by someone in the house between 5:15 and 5:30";
+        String hint3 = "One of the witnesses are lying. Compare their credibility levels...";
+        Scanner scan = new Scanner(System.in);
         System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice appears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
+        System.out.println("Enter any character to examine the scene.");
+        String wait = scan.next();
         System.out.println("When you arrive on the scene, you see: ");
-        Victim MrSmith = new Victim("John Smith", 75, "A financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of enemies.", "death by posioning");
-        Suspect WIFE = new Suspect("NAME", 25, "Mr. XXXX's young wife");
-        Suspect SON = new Suspect("NAME", 20, "Mr. XXXX's son from a previous marriage");
-        Suspect MAID = new Suspect("NAME", 77, "The elderly maid");
-        Suspect MOTHER = new Suspect("NAME", 99, "Mr. XXXX's ancient mother");
-        Suspect BROTHER= new Suspect("NAME", 68, "Mr. XXXX's younger brother");
-//        String fact1 = "5 people live in the house: an elder";
+        System.out.println(MrBeauregard.GetName() + ", a " + MrBeauregard.GetAge() + " year old" + MrBeauregard.GetDesc() + " The examining doctor tells you it was " + MrBeauregard.GetManner() + ". Enter any character to see suspect list.");
+        wait = scan.next();
+        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\n Enter any character to see the suspects' alibis.");
+        wait = scan.next();
+        System.out.println(wife.GetName() + wife.GetAlibi() );
     }
     
 }
@@ -85,15 +107,73 @@ class Victim{
         description = inDesc;
         mannerOfDeath = inManner;
     }
+    public String GetName(){
+        return name;
+    }
+    public int GetAge(){
+        return age;
+    }
+    public String GetDesc(){
+        return description;
+    }
+    public String GetManner(){
+        return mannerOfDeath;
+    }
 }
 
 class Suspect{
     private String name;
     private int age;
     private String description;
-    public Suspect(String inName, int inAge, String inDesc){
+    private String alibi;
+    
+    public Suspect(String inName, int inAge, String inDesc, String inAlibi){
         name = inName;
         age = inAge;
         description = inDesc;
+        alibi = inAlibi;
+    }
+    public String GetName(){
+        return name;
+    }
+    
+    public String GetAlibi(){
+        return alibi;
+    }
+    
+    public String toString(){
+        String ageString = ", " + age + " years old, ";
+        String descriptionString = "is " + description;
+        return name + ageString + descriptionString;
+    }
+}
+
+class Witness{
+    private String name;
+    private int credibility;
+    private String evidence;
+    private String relationship;
+    
+    public Witness(String inName, int inCred, String inEvid, String inRelat){
+        name = inName;
+        credibility = inCred;
+        evidence = inEvid;
+        relationship = inRelat;
+    }
+    
+    public String GetName(){
+        return name;
+    }
+    
+    public int GetCredibility(){
+        return credibility;
+    }
+    
+    public String GetEvidence(){
+        return evidence;
+    }
+    
+    public String GetRelationship(){
+        return relationship;
     }
 }
