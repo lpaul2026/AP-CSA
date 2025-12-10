@@ -1,9 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
 package com.mycompany.mysterygame;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 /**
  *
- * @author LPaul2026
+ * @author lizmp
  */
 public class MysteryGame {
 
@@ -48,7 +53,7 @@ public class MysteryGame {
             default:
                 playerChoice = player1;
         }
-        enum CrimeType {murder, theft, fraud, arson}
+        //enum CrimeType {murder, theft, fraud, arson}
         System.out.println("You have chosen " + playerChoice);
         if (playerChoice.equals(player1)){
             Detective Game = new Detective();
@@ -61,13 +66,13 @@ public class MysteryGame {
 
 class Detective{
     public Detective(){
-        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of enemies.", "death by posioning");
+        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of \nenemies.", "death by posioning");
         ArrayList<String> suspects = new ArrayList<>();
-        Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife", "Was out watching a movie the entire evening.");
-        Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage", "Was playing video games with his friend in his room all night.");
-        Suspect cook = new Suspect("Edith", 77, "The elderly cook", "No alibi. Was home when murder ocurred.");
-        Suspect mother = new Suspect("Genevieve", 99, "Mr. Beauregard's ancient mother", "No alibi. Was home when murder ocurred.");
-        Suspect brother = new Suspect("Winston", 68, "Mr. Beauregard's younger brother", "No alibi. Was home when murder ocurred.");
+        Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife", "was out watching a movie the entire evening.");
+        Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage", "was playing video games with his friend in his room all night.");
+        Suspect cook = new Suspect("Edith", 77, "the elderly cook", "has no alibi. Was home when murder ocurred.");
+        Suspect mother = new Suspect("Genevieve", 99, "Mr. Beauregard's ancient mother", "has no alibi. Was home when murder ocurred.");
+        Suspect brother = new Suspect("Winston", 68, "Mr. Beauregard's younger brother", "has no alibi. Was home when murder ocurred.");
         suspects.add(wife.GetName());
         suspects.add(son.GetName());
         suspects.add(cook.GetName());
@@ -83,15 +88,18 @@ class Detective{
         String hint2 = "The food could only be poisoned by someone in the house between 5:15 and 5:30";
         String hint3 = "One of the witnesses are lying. Compare their credibility levels...";
         Scanner scan = new Scanner(System.in);
-        System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice appears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
+        System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice \nappears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
         System.out.println("Enter any character to examine the scene.");
         String wait = scan.next();
         System.out.println("When you arrive on the scene, you see: ");
-        System.out.println(MrBeauregard.GetName() + ", a " + MrBeauregard.GetAge() + " year old" + MrBeauregard.GetDesc() + " The examining doctor tells you it was " + MrBeauregard.GetManner() + ". Enter any character to see suspect list.");
+        System.out.println(MrBeauregard.GetName() + ", a " + MrBeauregard.GetAge() + " year old" + MrBeauregard.GetDesc() + " The examining doctor tells you it was " + MrBeauregard.GetManner() + ". \nEnter any character to see suspect list.");
         wait = scan.next();
-        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\n Enter any character to see the suspects' alibis.");
+        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\nEnter any character to see the suspects' alibis.");
         wait = scan.next();
-        System.out.println(wife.GetName() + wife.GetAlibi() );
+        System.out.println(wife.GetName() + " " + wife.GetAlibi() + "\n" + son.GetName() + " " + son.GetAlibi() + "\n" +  cook.GetName() + " " + cook.GetAlibi() + "\n" + mother.GetName() + " " + mother.GetAlibi() + "\n" + brother.GetName() + " " + brother.GetAlibi());
+        System.out.println("Enter any character to see the facts of the case");
+        wait = scan.next();
+        System.out.println("Fact 1: " + fact1 + "\nFact 2: " + fact2 + "\nFact 3: " + fact3);
     }
     
 }
