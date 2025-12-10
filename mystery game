@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author lizmp
+ * @author LPaul2026
  */
 public class MysteryGame {
 
@@ -53,7 +53,6 @@ public class MysteryGame {
             default:
                 playerChoice = player1;
         }
-        //enum CrimeType {murder, theft, fraud, arson}
         System.out.println("You have chosen " + playerChoice);
         if (playerChoice.equals(player1)){
             Detective Game = new Detective();
@@ -66,7 +65,7 @@ public class MysteryGame {
 
 class Detective{
     public Detective(){
-        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with 4 ex-wives and plenty of \nenemies.", "death by posioning");
+        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with plenty of \nenemies.", "death by posioning");
         ArrayList<String> suspects = new ArrayList<>();
         Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife", "was out watching a movie the entire evening.");
         Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage", "was playing video games with his friend in his room all night.");
@@ -78,9 +77,9 @@ class Detective{
         suspects.add(cook.GetName());
         suspects.add(mother.GetName());
         suspects.add(brother.GetName());
-        Witness gardener = new Witness("Jimmy", 3, "witnessed Edith preparing the meal without adding anything out of the ordinary", "family gardener");
-        Witness friend = new Witness("Joshua", 1, "saw Joanna sneakily dumping something into the bushes behind the house. Also, that Benjamin didn't leave his room at all when they were playing video games together", "Benjamin's childhood friend and neighbor");
-        Witness passerby = new Witness("David", 4, "heard two male voices arguing loudly the night before the murder", "stranger who was walking by the house");
+        Witness gardener = new Witness("Jimmy", 3, "witnessed Edith preparing the meal without adding anything out of the ordinary. Also, they claim that they were talking to Winston from 5:00 - 5:30. ", "the family gardener");
+        Witness friend = new Witness("Joshua", 1, "seen Joanna sneakily dumping something into the bushes behind the house. Also, they claim that Benjamin didn't leave his room at all when they were playing video games together. ", "Benjamin's childhood friend and neighbor");
+        Witness passerby = new Witness("Dani", 4, "heard two male voices arguing loudly the night before the murder. ", "a stranger who was walking by the house");
         String fact1 = "The poison was in Mr. Beauregard's dinner, which he ate at 5:30. Genevieve and Winston ate dinner with him and did not get sick.";
         String fact2 = "The house has a security guard who swears no one else could have entered the house at the time of the murder. All the doors and windows were locked";
         String fact3 = "Edith finished preparing dinner at 5. The food was on the table at 5:15. Each person's food was in a different plate.";
@@ -89,19 +88,75 @@ class Detective{
         String hint3 = "One of the witnesses are lying. Compare their credibility levels...";
         Scanner scan = new Scanner(System.in);
         System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice \nappears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
-        System.out.println("Enter any character to examine the scene.");
+        System.out.println("Enter any key to examine the scene.");
         String wait = scan.next();
         System.out.println("When you arrive on the scene, you see: ");
-        System.out.println(MrBeauregard.GetName() + ", a " + MrBeauregard.GetAge() + " year old" + MrBeauregard.GetDesc() + " The examining doctor tells you it was " + MrBeauregard.GetManner() + ". \nEnter any character to see suspect list.");
+        System.out.println(MrBeauregard + ". \nEnter any key to see suspect list.");
         wait = scan.next();
-        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\nEnter any character to see the suspects' alibis.");
+        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\nEnter any key to see the suspects' alibis.");
         wait = scan.next();
-        System.out.println(wife.GetName() + " " + wife.GetAlibi() + "\n" + son.GetName() + " " + son.GetAlibi() + "\n" +  cook.GetName() + " " + cook.GetAlibi() + "\n" + mother.GetName() + " " + mother.GetAlibi() + "\n" + brother.GetName() + " " + brother.GetAlibi());
+        System.out.println("Alibis:\n" + wife.GetName() + " " + wife.GetAlibi() + "\n" + son.GetName() + " " + son.GetAlibi() + "\n" +  cook.GetName() + " " + cook.GetAlibi() + "\n" + mother.GetName() + " " + mother.GetAlibi() + "\n" + brother.GetName() + " " + brother.GetAlibi());
         System.out.println("Enter any character to see the facts of the case");
         wait = scan.next();
-        System.out.println("Fact 1: " + fact1 + "\nFact 2: " + fact2 + "\nFact 3: " + fact3);
+        System.out.println("Fact 1: " + fact1 + "\nFact 2: " + fact2 + "\nFact 3: " + fact3 + "\nEnter any key to see the list of witnesses");
+        wait = scan.next();
+        System.out.println("Witnesses:\n" + gardener + "\n" + friend + "\n" + passerby + "\nEach witness has a credibility level between 1 and 5, which is how likely they are to be telling the truth. 1 is the most unlikely and 5 is the most likely. Enter any key to see Review");
+        wait = scan.next();
+        System.out.println("Enter the name of any character you want to review: Alexander, Joanna, Benjamin, Edith, Genevieve, Winston, Jimmy, Joshua or Dani.\nEnter 1 to review the facts of the case. Enter 4 if you're ready to move on.");
+        String review = scan.next();
+        while (!review.equals("4")){
+            switch (review) {
+                case "Alexander" -> {
+                    System.out.println(MrBeauregard);
+                }
+                case "Joanna" -> {
+                    System.out.println(wife);
+                }
+                case "Benjamin" -> {
+                    System.out.println(son);
+                }
+                case "Edith" -> {
+                    System.out.println(cook);
+                }
+                case "Genevieve" -> {
+                    System.out.println(mother);
+                }
+                case "Winston" -> {
+                    System.out.println(brother);
+                }
+                case "Jimmy" -> {
+                    System.out.println(gardener);
+                }
+                case "Joshua" -> {
+                    System.out.println(friend);
+                }
+                case "Dani" -> {
+                    System.out.println(passerby);
+                }
+                case "1" -> {
+                    System.out.println(fact1 + "\n" + fact2 + "\n" + fact3);
+                }
+                default -> {
+                    System.out.println("Please enter a valid input.");
+                }
+            }
+            System.out.println("Enter another name or 1 to continue reviewing. Enter 4 to move on.");
+            review = scan.next();
+        }
+        System.out.println("Now that you've met all the characters and gathered all the evidence, you're ready to make a guess at who killed Mr. Beauregard! \nEnter the suspect you think did it: Joanna, Benjamin, Edith, Genevieve, or Winston. If you need some hints, enter hint instead of your guess.");
+        String decision = scan.next();
+        while (!decision.equals("Benjamin")){
+            if (decision.equals("hint")){
+                System.out.println(hint1 + "\n" + hint2 + "\n" + hint3 + "\nEnter the suspect you think did it.");
+                decision = scan.next(); 
+            }
+            else {
+                System.out.println("Incorrect. Please guess again.");
+                decision = scan.next();
+            }
+        }
+        System.out.println("Congratulations! You've found the culprit! Thanks for playing!");
     }
-    
 }
 
 class Victim{
@@ -126,6 +181,12 @@ class Victim{
     }
     public String GetManner(){
         return mannerOfDeath;
+    }
+    
+    public String toString(){
+        String ageString = ", a " + age + " year old";
+        String mannerString = " The examining doctor tells you it was " + mannerOfDeath;
+        return name + ageString + description + mannerString;
     }
 }
 
@@ -184,4 +245,10 @@ class Witness{
     public String GetRelationship(){
         return relationship;
     }
+    
+    public String toString(){
+        String credString = " has credibility level " + credibility;
+        return name + credString + ". They claim to have " + evidence + " \nThis person is" + relationship;
+    }
+    
 }
