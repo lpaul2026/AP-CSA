@@ -11,118 +11,96 @@ import java.util.ArrayList;
  * @author LPaul2026
  */
 public class MysteryGame {
-
     public static void main(String[] args) {
+        //instantiating a scanner object
         Scanner scan = new Scanner(System.in);
-        String playerChoice;
-        System.out.println("Welcome to the game of Mystery!");
-        String player1 = "detective";
-        String player2 = "suspect";
-        String player3 = "bystander";
-        String player4 = "victim";
-//        enum CrimeType {murder, theft, fraud, arson}
-//        System.out.println("Choose the type of crime.");        
-        System.out.println("Your choices to play are: ");
-        System.out.println("Detective. To choose this character, press 1");
-        System.out.println("Suspect. To choose this character, press 2");
-        System.out.println("Bystander. To choose this character, press 3");
-        System.out.println("Victim. To choose this character, press 4");
-        String input = scan.nextLine();
-        ArrayList<String> validChoices = new ArrayList<>();
-        validChoices.add("1");
-        validChoices.add("2");
-        validChoices.add("3");
-        validChoices.add("4");
-        while(!validChoices.contains(input)){
-            System.out.println("You have entered an invalid character. Please select 1, 2, 3, or 4 to continue the game.");
-            input = scan.next();
-        }
-        switch(input) {
-            case "1":
-                playerChoice = player1;
-                break;
-            case "2":
-                playerChoice = player2;
-                break;
-            case "3":
-                playerChoice = player3;
-                break;
-            case "4":
-                playerChoice = player4;
-                break;
-            default:
-                playerChoice = player1;
-        }
-        System.out.println("You have chosen " + playerChoice);
-        if (playerChoice.equals(player1)){
-            Detective Game = new Detective();
-        }
-        else if (playerChoice.equals(player2)){
-            System.out.println("You hear the doorbell ring. ");
-        }
+        //printing out welcome message
+        System.out.println("Welcome to the Mystery game. Enter any key to begin playing as a Detective!"); 
+        String cont = scan.next();
+        //creating game object that initiates the detective gameplay
+        Detective game = new Detective();
     }
 }
 
+//creating a class with the Detective storyline and gameplay
 class Detective{
+    //creating a constructor with no parameters for the gameplay
     public Detective(){
-        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with plenty of \nenemies.", "death by posioning");
+        //referring to the Victim class and creating a Victim object (the victim in the story)
+        Victim MrBeauregard = new Victim("Alexander Beauregard", 75, " financially wealthy, morally bankrupt businessman with plenty of \nenemies.", "death by posioning.");
+        //creating an array list for the suspects
         ArrayList<String> suspects = new ArrayList<>();
-        Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife", "was out watching a movie the entire evening.");
-        Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage", "was playing video games with his friend in his room all night.");
-        Suspect cook = new Suspect("Edith", 77, "the elderly cook", "has no alibi. Was home when murder ocurred.");
-        Suspect mother = new Suspect("Genevieve", 99, "Mr. Beauregard's ancient mother", "has no alibi. Was home when murder ocurred.");
-        Suspect brother = new Suspect("Winston", 68, "Mr. Beauregard's younger brother", "has no alibi. Was home when murder ocurred.");
+        //referring to the Suspect class and creating Suspect objects (potential perpetrators in the story)
+        Suspect wife = new Suspect("Joanna", 25, "Mr. Beauregard's young wife.", " was out watching a movie the entire evening.");
+        Suspect son = new Suspect("Benjamin", 20, "Mr. Beauregard's son from a previous marriage.", " was playing video games with his friend in his room all night.");
+        Suspect cook = new Suspect("Edith", 77, "the elderly cook.", " has no alibi. Was home when murder ocurred.");
+        Suspect mother = new Suspect("Genevieve", 99, "Mr. Beauregard's ancient mother.", " has no alibi. Was home when murder ocurred.");
+        Suspect brother = new Suspect("Winston", 68, "Mr. Beauregard's younger brother.", " has no alibi. Was home when murder ocurred.");
+        //adding the names of each suspect to the suspects arraylist
         suspects.add(wife.GetName());
         suspects.add(son.GetName());
         suspects.add(cook.GetName());
         suspects.add(mother.GetName());
         suspects.add(brother.GetName());
-        Witness gardener = new Witness("Jimmy", 3, "witnessed Edith preparing the meal without adding anything out of the ordinary. Also, they claim that they were talking to Winston from 5:00 - 5:30. ", "the family gardener");
-        Witness friend = new Witness("Joshua", 1, "seen Joanna sneakily dumping something into the bushes behind the house. Also, they claim that Benjamin didn't leave his room at all when they were playing video games together. ", "Benjamin's childhood friend and neighbor");
-        Witness passerby = new Witness("Dani", 4, "heard two male voices arguing loudly the night before the murder. ", "a stranger who was walking by the house");
+        //referring to the Witness class and creating witness objects (witnesses in the story)
+        Witness gardener = new Witness("Jimmy", 3, "witnessed Edith preparing the meal without adding anything out of the ordinary. Also, they claim that they were talking to Winston from 5:00 - 5:30. ", "the family gardener.");
+        Witness friend = new Witness("Joshua", 1, "seen Joanna sneakily dumping something into the bushes behind the house. Also, they claim that Benjamin \ndidn't leave his room at all when they were playing video games together. ", "Benjamin's childhood friend and neighbor.");
+        Witness passerby = new Witness("Dani", 4, "heard two male voices arguing loudly the night before the murder. ", "a stranger who was walking by the house.");
+        //creating fact Strings that are just extra context for the story
         String fact1 = "The poison was in Mr. Beauregard's dinner, which he ate at 5:30. Genevieve and Winston ate dinner with him and did not get sick.";
-        String fact2 = "The house has a security guard who swears no one else could have entered the house at the time of the murder. All the doors and windows were locked";
+        String fact2 = "The house has a security guard who swears no one else could have entered the house at the time of the murder. All the doors and windows were locked.";
         String fact3 = "Edith finished preparing dinner at 5. The food was on the table at 5:15. Each person's food was in a different plate.";
+        //creating hint Strings that can be referenced by the user at the end before they make their guess
         String hint1 = "One of the alibis are not true";
         String hint2 = "The food could only be poisoned by someone in the house between 5:15 and 5:30";
         String hint3 = "One of the witnesses are lying. Compare their credibility levels...";
+        //creating a scanner object
         Scanner scan = new Scanner(System.in);
+        //printing out the background of the story
         System.out.println("You're relaxing in your living room when you hear the telephone ring. You pick it up and a frantic voice \nappears on the other end. 'Mr. Detective, there's been a murder at XXXX Alphabet Street! Please come immediately!");        
         System.out.println("Enter any key to examine the scene.");
+        //creating a string that is just a place for the user to input. This breaks up the story so it's not unclear paragraphs of text. "wait" is used after each chunk of info
         String wait = scan.next();
+        //introducing the Victim 
         System.out.println("When you arrive on the scene, you see: ");
         System.out.println(MrBeauregard + ". \nEnter any key to see suspect list.");
         wait = scan.next();
-        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\nEnter any key to see the suspects' alibis.");
+        //introducing the suspects
+        System.out.println("The potential suspects in the case: \n" + suspects + "\nEnter any key to see the suspects' alibis.");
         wait = scan.next();
+        //showing the alibis of the suspects
         System.out.println("Alibis:\n" + wife.GetName() + " " + wife.GetAlibi() + "\n" + son.GetName() + " " + son.GetAlibi() + "\n" +  cook.GetName() + " " + cook.GetAlibi() + "\n" + mother.GetName() + " " + mother.GetAlibi() + "\n" + brother.GetName() + " " + brother.GetAlibi());
-        System.out.println("Enter any character to see the facts of the case");
+        System.out.println("Enter any key to see the facts of the case.");
         wait = scan.next();
-        System.out.println("Fact 1: " + fact1 + "\nFact 2: " + fact2 + "\nFact 3: " + fact3 + "\nEnter any key to see the list of witnesses");
+        //printing out the facts of the case
+        System.out.println("Fact 1: " + fact1 + "\nFact 2: " + fact2 + "\nFact 3: " + fact3 + "\nEnter any key to see the list of witnesses.");
         wait = scan.next();
-        System.out.println("Witnesses:\n" + gardener + "\n" + friend + "\n" + passerby + "\nEach witness has a credibility level between 1 and 5, which is how likely they are to be telling the truth. 1 is the most unlikely and 5 is the most likely. Enter any key to see Review");
+        //showing witness evidence and reliability
+        System.out.println("Witnesses:\n" + gardener + "\n" + friend + "\n" + passerby + "\nEach witness has a credibility level between 1 and 5, which is how likely they are to be telling the truth. 1 is the most unlikely and 5 is the most likely. Enter any key to see Review.");
         wait = scan.next();
+        //review opportunity so user can go over any characters/evidence they want
         System.out.println("Enter the name of any character you want to review: Alexander, Joanna, Benjamin, Edith, Genevieve, Winston, Jimmy, Joshua or Dani.\nEnter 1 to review the facts of the case. Enter 4 if you're ready to move on.");
         String review = scan.next();
+        //4 ends the loop, until then user can continue putting in names to review what they mean
         while (!review.equals("4")){
             switch (review) {
                 case "Alexander" -> {
                     System.out.println(MrBeauregard);
                 }
                 case "Joanna" -> {
-                    System.out.println(wife);
+                    System.out.println(wife + "" + wife.GetAlibi());
                 }
                 case "Benjamin" -> {
-                    System.out.println(son);
+                    System.out.println(son + son.GetAlibi());
                 }
                 case "Edith" -> {
-                    System.out.println(cook);
+                    System.out.println(cook + cook.GetAlibi());
                 }
                 case "Genevieve" -> {
-                    System.out.println(mother);
+                    System.out.println(mother + mother.GetAlibi());
                 }
                 case "Winston" -> {
-                    System.out.println(brother);
+                    System.out.println(brother + brother.GetAlibi());
                 }
                 case "Jimmy" -> {
                     System.out.println(gardener);
@@ -136,6 +114,7 @@ class Detective{
                 case "1" -> {
                     System.out.println(fact1 + "\n" + fact2 + "\n" + fact3);
                 }
+                //default case is everything that's not a 1, 4, or a character name. this makes it so that the game doesn't break if the wrong key is entered
                 default -> {
                     System.out.println("Please enter a valid input.");
                 }
@@ -143,33 +122,46 @@ class Detective{
             System.out.println("Enter another name or 1 to continue reviewing. Enter 4 to move on.");
             review = scan.next();
         }
-        System.out.println("Now that you've met all the characters and gathered all the evidence, you're ready to make a guess at who killed Mr. Beauregard! \nEnter the suspect you think did it: Joanna, Benjamin, Edith, Genevieve, or Winston. If you need some hints, enter hint instead of your guess.");
+        //printing out prompt for user to make their guess, giving them option to see the 3 hints
+        System.out.println("Now that you've met all the characters and gathered all the evidence, you're ready to make a guess at who killed Mr. Beauregard! \nEnter the suspect you think did it: " + suspects + " If you need some hints, enter hint instead of your guess.");
+        //Benjamin is the murderer
+        String murderer = "Benjamin";
+        //storing user's response as decision
         String decision = scan.next();
-        while (!decision.equals("Benjamin")){
+        //while the decision is not the murderer, the loop continues
+        while (!decision.equals(murderer)){
+            //if users enter hint, they will see the hints and then be able to enter their guess
             if (decision.equals("hint")){
                 System.out.println(hint1 + "\n" + hint2 + "\n" + hint3 + "\nEnter the suspect you think did it.");
                 decision = scan.next(); 
             }
             else {
+            //if decision is anything other than "hint" or the murderer, the user has the opportunity to continue guessing
                 System.out.println("Incorrect. Please guess again.");
                 decision = scan.next();
             }
         }
+        //message for when the user finds culprit
         System.out.println("Congratulations! You've found the culprit! Thanks for playing!");
     }
 }
 
+//creating the Victim class
 class Victim{
+    //creating private variables that will be referenced later
     private String name;
     private int age;
     private String description;
     private String mannerOfDeath;
+    //creating a Victim constructor with parameters that match the information provided
     public Victim(String inName, int inAge, String inDesc, String inManner){
+        //providing the info the the Victim class
         name = inName;
         age = inAge;
         description = inDesc;
         mannerOfDeath = inManner;
     }
+    //creating "getter" methods for all the data of a Victim instantiated object
     public String GetName(){
         return name;
     }
@@ -183,6 +175,8 @@ class Victim{
         return mannerOfDeath;
     }
     
+    //creating a method that prints certain information when called
+    @Override
     public String toString(){
         String ageString = ", a " + age + " year old";
         String mannerString = " The examining doctor tells you it was " + mannerOfDeath;
@@ -190,6 +184,7 @@ class Victim{
     }
 }
 
+//creating the Suspect class (similar to process for Victim class but with slightly different variables and parameters)
 class Suspect{
     private String name;
     private int age;
@@ -210,6 +205,7 @@ class Suspect{
         return alibi;
     }
     
+    @Override
     public String toString(){
         String ageString = ", " + age + " years old, ";
         String descriptionString = "is " + description;
@@ -217,6 +213,7 @@ class Suspect{
     }
 }
 
+//creating the Witness class (similar to process for Victim and Suspect classes but with slightly different variables and parameters)
 class Witness{
     private String name;
     private int credibility;
@@ -246,9 +243,9 @@ class Witness{
         return relationship;
     }
     
+    @Override
     public String toString(){
         String credString = " has credibility level " + credibility;
-        return name + credString + ". They claim to have " + evidence + " \nThis person is" + relationship;
+        return name + credString + ". They claim to have " + evidence + " \nThis person is " + relationship;
     }
-    
 }
