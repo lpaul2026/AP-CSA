@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author LPaul2026
  */
+
 public class MysteryGame {
     public static void main(String[] args) {
         //instantiating a scanner object
@@ -63,10 +64,10 @@ class Detective{
         String wait = scan.next();
         //introducing the Victim 
         System.out.println("When you arrive on the scene, you see: ");
-        System.out.println(MrBeauregard + ". \nEnter any key to see suspect list.");
+        System.out.println(MrBeauregard + " \nEnter any key to see suspect list.");
         wait = scan.next();
         //introducing the suspects
-        System.out.println("The potential suspects in the case: \n" + suspects + "\nEnter any key to see the suspects' alibis.");
+        System.out.println("The potential suspects in the case: \n" + wife + "\n" + son + "\n" + cook + "\n" + mother + "\n" + brother + "\nEnter any key to see the suspects' alibis.");
         wait = scan.next();
         //showing the alibis of the suspects
         System.out.println("Alibis:\n" + wife.GetName() + " " + wife.GetAlibi() + "\n" + son.GetName() + " " + son.GetAlibi() + "\n" +  cook.GetName() + " " + cook.GetAlibi() + "\n" + mother.GetName() + " " + mother.GetAlibi() + "\n" + brother.GetName() + " " + brother.GetAlibi());
