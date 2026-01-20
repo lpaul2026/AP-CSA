@@ -1,0 +1,58 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.studentmain;
+
+/**
+ *
+ * @author LPaul2026
+ */
+//public class
+public class StudentMain{
+    public static void main(String args[]){
+        Student st1 = new Student("Bob", "Smith", "Calculus", "Bio", "Chem");
+        //doesn't do anything right now.
+    }
+}
+//basic class Student - should have 3 courses
+class Student
+{
+    private String firstName, lastName, course1, course2, course3;
+    Course c1 = new Course();
+    int s = c1.setScore(85);
+    //empty constructor to create empty Student object
+    public Student()
+    {
+        firstName = "";
+        lastName = "";
+    }
+    //basic constructor to create Student object with name only
+    public Student(String first, String last, String one, String two, String three)
+    {
+        firstName = first;
+        lastName = last;
+        course1 = one;
+        course2 = two;
+        course3 = three;
+    }
+    //needs a constructor to include 3 course objects
+    //basic toString code
+    public String toString()
+    {
+        String result;
+        result = firstName + " " + lastName + "\n";
+        return result;
+    }
+}
+//basic class Course
+class Course{
+    public int score = 0;
+    public int setScore(int inScore){
+        score = inScore;
+        return score;
+    }
+    public int getScore(){
+        return score;
+    }
+}
