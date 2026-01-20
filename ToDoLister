@@ -3,8 +3,7 @@
  */
 
 package com.mycompany.todolister;
-
-/**
+ /**
  *
  * @author lpaul2026
  */
@@ -12,12 +11,41 @@ public class ToDoLister {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        class Task {
-            
-        }
+        //class Task {
+            Task dishes = new Task();
     }
 }
 
-interface Priority {
+class Task implements Priority, Comparable, Complexity {
+    private int priorityLevel;
     
+    @Override
+    public void setPriority(int level){
+        priorityLevel = level;
+    }
+    public int getComplexity(){
+        return priorityLevel;
+    }
+    @Override
+    public void myMethodTwo(){
+        System.out.println("hello");
+    }
+    @Override
+    public void myMethodThree(){
+        System.out.println("hey");
+    }
+}
+
+
+interface Priority{
+    public void setPriority(int priority);
+    public void getPriority();
+}
+
+interface Comparable{
+    void myMethodTwo();
+}
+
+interface Complexity{
+    void myMethodThree();
 }
