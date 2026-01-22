@@ -3,6 +3,8 @@
  */
 
 package com.mycompany.studentmain;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,16 +13,33 @@ package com.mycompany.studentmain;
 //public class
 public class StudentMain{
     public static void main(String args[]){
-        Student st1 = new Student("Bob", "Smith", "Calculus", "Bio", "Chem");
-        //doesn't do anything right now.
+        Scanner scan = new Scanner(System.in);
+        Student st1 = new Student("Bob", "Smith");
+        String firstName;
+        String lastName;
+        int average = st1.getAverage();
+        System.out.println(st1);
+        System.out.println("Would you like to add another student? yes/no");
+        String dec = scan.nextLine();
+        if (dec.equals("yes")){
+            System.out.println("Enter the first name of the student");
+            firstName = scan.next();
+            System.out.println("Enter the last name of the student");
+            lastName = scan.next();
+        }
+        Student st2 = new Student(firstName, lastName);
     }
 }
 //basic class Student - should have 3 courses
-class Student
-{
-    private String firstName, lastName, course1, course2, course3;
-    Course c1 = new Course();
-    int s = c1.setScore(85);
+class Student{
+    public int avg;
+    private String firstName, lastName;
+    Course calc = new Course("Calculus");
+    Course bio = new Course("Biology");
+    Course phys = new Course("Physics");
+    int c = calc.setScore(85);
+    int b = bio.setScore(92);
+    int p = phys.setScore(76);
     //empty constructor to create empty Student object
     public Student()
     {
@@ -28,29 +47,35 @@ class Student
         lastName = "";
     }
     //basic constructor to create Student object with name only
-    public Student(String first, String last, String one, String two, String three)
-    {
+    public Student(String first, String last){
         firstName = first;
         lastName = last;
-        course1 = one;
-        course2 = two;
-        course3 = three;
+    }    
+    public int getAverage(){
+        avg = (c + b + p)/3;
+        return avg;
     }
     //needs a constructor to include 3 course objects
     //basic toString code
     public String toString()
     {
-        String result;
-        result = firstName + " " + lastName + "\n";
-        return result;
+        String nameString, courseString, avgString;
+        nameString = firstName + " " + lastName + "\n";
+        courseString = "is taking " + calc.courseID + ", " + bio.courseID + ", and " + phys.courseID + "\n";
+        avgString = "The average across all classes is " + avg;
+        return nameString + courseString + avgString;
     }
 }
 //basic class Course
 class Course{
     public int score = 0;
+    public String courseID;
     public int setScore(int inScore){
         score = inScore;
         return score;
+    }
+    public Course(String aCourseID){
+        courseID = aCourseID;
     }
     public int getScore(){
         return score;
