@@ -4,42 +4,37 @@
 
 package com.mycompany.studentmain;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  *
  * @author LPaul2026
  */
+
 //public class
 public class StudentMain{
     public static void main(String args[]){
-        Scanner scan = new Scanner(System.in);
+        //create a new Student object
         Student st1 = new Student("Bob", "Smith");
-        String firstName;
-        String lastName;
+        //call the average method from the Student class
         int average = st1.getAverage();
+        //print out from the toString method
         System.out.println(st1);
-        System.out.println("Would you like to add another student? yes/no");
-        String dec = scan.nextLine();
-        if (dec.equals("yes")){
-            System.out.println("Enter the first name of the student");
-            firstName = scan.next();
-            System.out.println("Enter the last name of the student");
-            lastName = scan.next();
-        }
-        Student st2 = new Student(firstName, lastName);
     }
 }
 //basic class Student - should have 3 courses
 class Student{
-    public int avg;
+    //creating a private variable which will store the average int
+    private int avg;
+    //creating private variables for the student's name
     private String firstName, lastName;
+    //creating 3 course objects
     Course calc = new Course("Calculus");
     Course bio = new Course("Biology");
     Course phys = new Course("Physics");
-    int c = calc.setScore(85);
-    int b = bio.setScore(92);
-    int p = phys.setScore(76);
+    //setting the scores of each course
+    private int c = calc.setScore(85);
+    private int b = bio.setScore(92);
+    private int p = phys.setScore(76);
     //empty constructor to create empty Student object
     public Student()
     {
@@ -50,13 +45,13 @@ class Student{
     public Student(String first, String last){
         firstName = first;
         lastName = last;
-    }    
+    }
+    //method to get the average across all classes
     public int getAverage(){
         avg = (c + b + p)/3;
         return avg;
     }
-    //needs a constructor to include 3 course objects
-    //basic toString code
+    //basic toString code, printing out all info
     public String toString()
     {
         String nameString, courseString, avgString;
@@ -68,15 +63,20 @@ class Student{
 }
 //basic class Course
 class Course{
+    //setting initial test score to 0
     public int score = 0;
+    //String for the name of the course
     public String courseID;
+    //method to be called for setting the score
     public int setScore(int inScore){
         score = inScore;
         return score;
     }
+    //constructor for course objects with a string
     public Course(String aCourseID){
         courseID = aCourseID;
     }
+    //method for getting the score
     public int getScore(){
         return score;
     }
