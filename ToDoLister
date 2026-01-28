@@ -3,49 +3,81 @@
  */
 
 package com.mycompany.todolister;
+import java.util.*;
  /**
  *
  * @author lpaul2026
  */
 public class ToDoLister {
-
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        //class Task {
-            Task dishes = new Task();
+        //creating a list I'll add the tasks to
+        List<Task> toDoList = new ArrayList<>();
+        //adding the tasks with the various levels
+        toDoList.add(new Task("Do Dishes", 10, 5));
+        toDoList.add(new Task("Make Dinner", 6, 3));
+        toDoList.add(new Task("Go Shopping", 9, 2));
+        toDoList.add(new Task("Clean Room", 10, 9));
+        toDoList.add(new Task("Do Homework", 8, 10));
+        //sorting the list
+        Collections.sort(toDoList);
+        //printing the list
+        System.out.println("Tasks anked by priority and complexity");
+        for (Task t:toDoList){
+            System.out.println(t);
+        }
     }
 }
 
-class Task implements Priority, Comparable, Complexity {
+//creating class to implement interfaces
+class Task implements Priority, Comparable<Task>, Complexity {
+    //creating private variables
+    private String name;
     private int priorityLevel;
+    private int complexityLevel;
     
-    @Override
-    public void setPriority(int level){
-        priorityLevel = level;
+    //creating constructor for Task objects
+    public Task(String inName, int inPriorityLevel, int inComplexityLevel){
+        name = inName;
+        priorityLevel = inPriorityLevel;
+        complexityLevel =inComplexityLevel;
     }
-    public int getComplexity(){
+    //creating method to set priority levels
+    public void setPriority(int pLevel){
+        priorityLevel = pLevel;
+    }
+    //method to get priority levels
+    public int getPriority(){
         return priorityLevel;
     }
-    @Override
-    public void myMethodTwo(){
-        System.out.println("hello");
+    //creating method to set complexity levels
+    public void setComplexity(int cLevel){
+        complexityLevel = cLevel;
     }
+    //method to get complexity levels
+    public int getComplexity(){
+        return complexityLevel;
+    }
+    //method to compare the tasks, first based on priority, then on complexity if the priority is equal
     @Override
-    public void myMethodThree(){
-        System.out.println("hey");
+    public int compareTo(Task other){
+        if (priorityLevel != other.priorityLevel){
+            return Integer.compare(other.priorityLevel, priorityLevel);
+        }
+        return Integer.compare(other.complexityLevel, complexityLevel);
+    }
+    //String method to print results
+    @Override
+    public String toString(){
+        return String.format("Task: %-15s | Priority: %d | Complexity: %d", name, priorityLevel, complexityLevel);
     }
 }
-
-
+//creating the priority interface
 interface Priority{
-    public void setPriority(int priority);
-    public void getPriority();
+    void setPriority(int priority);
+    int getPriority();
 }
-
-interface Comparable{
-    void myMethodTwo();
-}
-
+//creating the complexity interface
 interface Complexity{
-    void myMethodThree();
+    void setComplexity(int complexity);
+    int getComplexity();
 }
