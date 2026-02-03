@@ -1,0 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.weekdays;
+/**
+ *
+ * @author LPaul2026
+ */
+public class WeekDays {
+
+    public static void main(String[] args) {
+        String[] weekDays = new String[7];
+        String[] temp;
+        weekDays[0] = "Monday";
+        weekDays[1] = "Tuesday";
+        weekDays[2] = "Wednesday";
+        weekDays[3] = "Thursday";
+        weekDays[4] = "Friday";
+        weekDays[5] = "Saturday";
+        weekDays[6] = "Sunday";
+        System.out.println(weekDays[0] + "\n" + weekDays[1] + "\n" + weekDays[2] + "\n" + weekDays[3] + "\n" + weekDays[4] + "\n" + weekDays[5] + "\n" + weekDays[6]);
+        temp = new String[5];
+        for(int j = 0; j < 5; j++){
+            temp[j] = weekDays[j];
+        }
+        weekDays = temp;
+        System.out.println();
+        System.out.println("Resized array is: \n" + weekDays[0] + "\n" + weekDays[1] + "\n" + weekDays[2] + "\n" + weekDays[3] + "\n" + weekDays[4]);
+    }
+}
