@@ -30,9 +30,9 @@ public class CardDeck {
         }
         //printing a line between deck and what's being dealt
         System.out.println("\n");
-        //for statement for 5 hands of 4 cards each
-        for(int j = 0; j < 5; j++){
-            for(int i = 0; i < 4; i++){
+        //for statement for 4 hands of 5 cards each
+        for(int j = 0; j < 4; j++){
+            for(int i = 0; i < 5; i++){
                 //generating a random row value (hearts, diamonds, etc)
                 int randRow = rand.nextInt(4);
                 //generating a random column value (ace, 2, 3, etc)                
