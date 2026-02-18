@@ -13,6 +13,7 @@ import java.util.Random;
 public class CardDeck {
     public static void main(String[] args) {
         Random rand = new Random();
+        //creating a 2D array with all the cards
         String[][] deckOfCards =
         {
             {"Ace of clubs", "2 of clubs", "3 of clubs", "4 of clubs", "5 of clubs", "6 of clubs", "7 of clubs", "8 of clubs", "9 of clubs", "10 of clubs", "Jack of clubs", "Queen of clubs", "King of clubs"},
@@ -20,28 +21,35 @@ public class CardDeck {
             {"Ace of diamonds", "2 of diamonds", "3 of diamonds", "4 of diamonds", "5 of diamonds", "6 of diamonds", "7 of diamonds", "8 of diamonds", "9 of diamonds", "10 of diamonds", "Jack of diamonds", "Queen of diamonds", "King of diamonds"},
             {"Ace of hearts", "2 of hearts", "3 of hearts", "4 of hearts", "5 of hearts", "6 of hearts", "7 of hearts", "8 of hearts", "9 of hearts", "10 of hearts", "Jack of hearts", "Queen of hearts", "King of hearts"}
         };
+        //printing out the entrie deck of cards
         System.out.println("The full deck of cards:");
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 13; j++) {
-                System.out.println(deckOfCards[i][j] + "\n");
+                System.out.println(deckOfCards[i][j]);
             }
         }
-        
-        for(int i = 0; i < 4; i++){
-            for (int row = 0; row < 13; row++){
-                for(int col =0; col < 4; col++){
-                    int randRow = rand.nextInt(4);
-                    int randColumn = rand.nextInt(13);
-                    System.out.println(deckOfCards[randRow][randColumn]);
-                }
+        //printing a line between deck and what's being dealt
+        System.out.println("\n");
+        //for statement for 5 hands of 4 cards each
+        for(int j = 0; j < 5; j++){
+            for(int i = 0; i < 4; i++){
+                //generating a random row value (hearts, diamonds, etc)
+                int randRow = rand.nextInt(4);
+                //generating a random column value (ace, 2, 3, etc)                
+                int randColumn = rand.nextInt(13);
+                //creating a do... while loop so that the same card isn't called twice
+                do{
+                    //making the program re-draw a card every time a null one is called
+                    randRow = rand.nextInt(4);
+                    randColumn = rand.nextInt(13);
+                } while (deckOfCards[randRow][randColumn] == null);
+                //printing out the card
+                System.out.println(deckOfCards[randRow][randColumn]);
+                //setting the card to null so it can't be called again and will be avoided by do... while loop
+                deckOfCards[randRow][randColumn] = null;
             }
+            //printing out a line so there is a space between each hand
+            System.out.println("");
         }
-        
-        
- //       for(int row = 0; row < deckOfCards.length;row++){
-   //         for(int col = 0; col < deckOfCards[row].length; col++){
-     //           int randRow = int(Math.random()*)
-          //}
-     //   }
     }
 }
