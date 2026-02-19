@@ -1,19 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-package com.mycompany.vehicleassignment;
-
-/**
- *
- * @author LPaul2026
- */
 public class VehicleAssignment {
 
     public static void main(String[] args) {
-        Car teslaM3 = new Car("Tesla", 150.0, 5, 826.0, 142.0);
+        Car teslaM3 = new Car("Tesla", 150.0, 5, 826.0, 142.0, "Red");
         System.out.println(teslaM3);
-        RowBoat whitehall = new RowBoat("Gig Harbor", 6.3, 4, 575.0, false, 2);
+        RowBoat whitehall = new RowBoat("Gig Harbor", 6.3, 4, 575.0, true, 2);
         System.out.println(whitehall);
     }
 }
@@ -90,9 +80,10 @@ class Car extends Vehicle{
     boolean stereo = false;
     double mpg = 0.0; //has an extra variable, mpg
 
-    public Car(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG){
+    public Car(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
         super(inBrand, inSpeed, inPassengers, inCargo);
         mpg = inMPG;
+        color = inColor;
     }
     public void setSpoiler(boolean inSpoiler){
         spoiler = inSpoiler;
@@ -136,15 +127,15 @@ class Car extends Vehicle{
 
 class EV extends Car{
     int wheels = 4;
-    public EV(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG){
-        super(inBrand, inSpeed, inPassengers, inCargo, inMPG);
+    public EV(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
+        super(inBrand, inSpeed, inPassengers, inCargo, inMPG, inColor);
     }
 }
 
 class MagicSchoolBus extends Car{
     int wheels = 6;
-    public MagicSchoolBus(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG){
-        super(inBrand, inSpeed, inPassengers, inCargo, inMPG);
+    public MagicSchoolBus(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
+        super(inBrand, inSpeed, inPassengers, inCargo, inMPG, inColor);
     }
 }
 
@@ -170,10 +161,10 @@ class RowBoat extends Boat{
     }
 }
 class Airplane extends Vehicle{
-    
+ //   int 
 }
 
-class Tortuga extends Airplane{
+class Spaceship extends Airplane{
     
 }
 
