@@ -134,7 +134,7 @@ class EV extends Car{
 
 class MagicSchoolBus extends Car{
     int wheels = 6;
-    public MagicSchoolBus(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
+    public MagicSchoolBus(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor, String minSize, String maxSize){
         super(inBrand, inSpeed, inPassengers, inCargo, inMPG, inColor);
     }
 }
