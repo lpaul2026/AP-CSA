@@ -1,0 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.pascaltriangle;
+import java.util.Scanner;
+/**
+ *
+ * @author LPaul2026
+ */
+public class PascalTriangle {
+
+    public static void main(String[] args) {
+        //creating a scanner object for user input
+        Scanner scan = new Scanner(System.in);
+        //printing out user promptt for number of rows
+        System.out.println("Enter how many rows you want in Pascal's Triangle:");
+        //setting the number of rows n to what the user inputs
+        int n = scan.nextInt();
+        //creating an array for the triangle with n number of rows
+        int[][] triangle = new int[n][];
+        //creating a triangle with the numbers filled in, each number is sum of the two numbers above it 
+        for(int i = 0; i < n; i++){
+            triangle[i] = new int[i+1];
+            for (int j = 0; j <= i; j++){
+                if (j == 0 || j == i){
+                    triangle[i][j] = 1;
+                }
+                else{
+                    triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j];
+                }
+            }
+        }
+        //printing out the array in a triangle format, with proper spacing and formatting
+        System.out.println("Pascal's Triangle with " + n + " rows:");
+        for(int i = 0; i < n; i++){
+            for (int k = 0; k < n - i - 1; k++){
+                System.out.print("  ");
+            }
+            for (int j = 0; j <= i; j++) {
+                System.out.printf("%4d", triangle[i][j]);
+            }
+            //printing empty line between each row of values in the triangle
+            System.out.println();
+        }
+    }
+}
