@@ -1,0 +1,121 @@
+public class Sort {
+    public static void main(String[] args) {
+        //creating an array with the Contact objects
+        Contact[] friends = new Contact[9];
+        friends[0] = new Contact("John", "Smith", "610-555-7384");
+        friends[1] = new Contact("Sarah", "Barnes", "215-555-3827");
+        friends[2] = new Contact("Aaron", "Riley", "733-555-2969");
+        friends[3] = new Contact("Laura", "Ramone", "663-555-3984");
+        friends[4] = new Contact("Larry", "Smith", "464-555-3489");
+        friends[5] = new Contact("Frank", "Phelps", "322-555-2284");
+        friends[6] = new Contact("Mario", "Guzman", "804-555-9066");
+        friends[7] = new Contact("Marsha", "Grant", "464-555-3489");
+        friends[8] = new Contact("Joey", "Ramone", "464-555-3489");
+
+        // Testing Selection Sort
+        Sorting.selectionSort(friends);
+        System.out.println("*** Sorted by Phone, then Name (Selection Sort) ***");
+        for (Contact friend : friends)
+            System.out.println(friend);
+        
+        System.out.println();
+
+        // Testing Insertion Sort
+        Sorting.insertionSort(friends);
+        System.out.println("*** Sorted by Phone, then Name (Insertion Sort) ***");
+        for (Contact friend : friends)
+            System.out.println(friend);
+    }
+}
+
+class Sorting {
+    public static void selectionSort(Comparable[] list) {
+        int min;
+        Comparable temp;
+        for (int index = 0; index < list.length - 1; index++) {
+            min = index;
+            for (int scan = index + 1; scan < list.length; scan++) {
+                if (list[scan].compareTo(list[min]) < 0) {
+                    min = scan;
+                }
+            }
+            //swapping the values
+            temp = list[min];
+            list[min] = list[index];
+            list[index] = temp;
+        }
+    }
+
+    public static void insertionSort(Comparable[] list) {
+        for (int index = 1; index < list.length; index++) {
+            Comparable key = list[index];
+            int position = index;
+
+            // shifting larger values to the right
+            while (position > 0 && key.compareTo(list[position - 1]) < 0) {
+                list[position] = list[position - 1];
+                position--;
+            }
+            list[position] = key;
+        }
+    }
+}
+
+//contact class which will be called when these objects are made
+class Contact implements Comparable {
+    private String firstName, lastName, phone;
+
+    public Contact(String first, String last, String telephone) {
+        firstName = first;
+        lastName = last;
+        phone = telephone;
+    }
+
+    @Override
+    public String toString() {
+        return phone + "\t" + lastName + ", " + firstName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Contact)) return false;
+        Contact otherC = (Contact) other;
+        return (lastName.equals(otherC.getLastName()) &&
+                firstName.equals(otherC.getFirstName()) &&
+                phone.equals(otherC.getPhone()));
+    }
+
+    /**
+     * Logic: Sort by Phone Number first.
+     * If phones match, sort by Last Name.
+     * If last names match, sort by First Name.
+     */
+    @Override
+    public int compareTo(Object other) {
+        Contact otherContact = (Contact) other;
+        
+        // 1. Compare phone numbers
+        int result = this.phone.compareTo(otherContact.getPhone());
+
+        // 2. If phone numbers are identical, compare last names
+        if (result == 0) {
+            result = this.lastName.compareTo(otherContact.getLastName());
+            
+            // 3. If last names are also identical, compare first names
+            if (result == 0) {
+                result = this.firstName.compareTo(otherContact.getFirstName());
+            }
+        }
+        return result;
+    }
+//printing out the results with return
+    public String getFirstName(){
+        return firstName;
+    }
+    public String getLastName(){
+        return lastName;
+    }
+    public String getPhone() { 
+        return phone; 
+    }
+}
