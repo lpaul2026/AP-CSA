@@ -1,181 +1,287 @@
 public class VehicleAssignment {
 
     public static void main(String[] args) {
+
+        //Car
         Car teslaM3 = new Car("Tesla", 150.0, 5, 826.0, 142.0, "Red");
         System.out.println(teslaM3);
-        RowBoat whitehall = new RowBoat("Gig Harbor", 6.3, 4, 575.0, true, 2);
+
+        //EV
+        EV teslaEV = new EV("Tesla", 140.0, 5, 900.0, 130.0, "Blue", 358);
+        System.out.println(teslaEV);
+
+        //Magic School Bus
+        MagicSchoolBus msb = new MagicSchoolBus("Magic Co.", 60, 20, 2000,
+                10, "Yellow", "Microscopic", "Planet-sized");
+        System.out.println(msb);
+
+        //RowBoat
+        RowBoat whitehall = new RowBoat("Gig Harbor", 6.3, 4, 575.0, false, 2);
         System.out.println(whitehall);
+
+        //Cruise Ship
+        CruiseShip oasis = new CruiseShip("Royal Caribbean", 25.0, 5400, 1000000, false, 18);
+        System.out.println(oasis);
+
+        //Fighter Jet
+        FighterJet f22 = new FighterJet("Lockheed Martin", 1500, 1, 20000, 2);
+        System.out.println(f22);
+
+        //Blimp
+        Blimp goodyear = new Blimp("Goodyear", 55, 10, 5000, 8000);
+        System.out.println(goodyear);
+
+        //Spaceship
+        Spaceship falcon = new Spaceship("SpaceX", 17000, 4, 50000, true);
+        System.out.println(falcon);
+
+        //Train
+        Train amtrak = new Train("Amtrak", 125, 300, 20000, "Diesel");
+        System.out.println(amtrak);
     }
 }
 
-class Vehicle implements Speedometer{
-    //base (Class wide) variables
-    protected String brandName = "";
-    protected double speed = 0.0;
-    protected int passengers = 0;
-    protected double cargoWeight = 0.0;
-    //Base default constructor
-    public Vehicle(){
+// Interface for speed control
+interface Speedometer {
+    public void setSpeed(double inSpeed);
+    public double getSpeed();
+}
+
+// Base Vehicle class
+class Vehicle implements Speedometer {
+    protected String brandName;
+    protected double speed;
+    protected int passengers;
+    protected double cargoWeight;
+
+    public Vehicle() {
         brandName = "";
         speed = 0.0;
         passengers = 0;
         cargoWeight = 0.0;
     }
-    public Vehicle(String inBrand, double inSpeed, int inPassengers, double inCargo){
-        brandName = inBrand;
-        speed = inSpeed;
-        passengers = inPassengers;
-        cargoWeight = inCargo;
+
+    public Vehicle(String brand, double speed, int passengers, double cargo) {
+        this.brandName = brand;
+        this.speed = speed;
+        this.passengers = passengers;
+        this.cargoWeight = cargo;
     }
-    //getters and setters
-    public Vehicle(String inBrand){
-        brandName = inBrand;
+
+    public String getBrand() { return brandName; }
+    public void setBrandName(String brand) { this.brandName = brand; }
+
+    public double getSpeed() { return speed; }
+    public void setSpeed(double speed) { this.speed = speed; }
+// method to get how many passengers can be held
+    public int getPassengers() { return passengers; }
+
+   //method to set how many passengers can be held
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
     }
-    public String getBrand(){
-        return brandName;
-    }
-    public void setBrandName(String inBrand){
-        brandName = inBrand;
-    }
-    public double getSpeed(){
-        return speed;
-    }
-    public void setSpeed(double inSpeed){
-        speed = inSpeed;
-    }
-    public int getPassengers(){
-        return passengers;
-    }
-    public void setPassengers(int inPassengers){
-        speed = inPassengers;
-    }
-    public double getCargoWeight(){
-        return cargoWeight;
-    }
-    public void setCargoWeight(double inCargoWeight){
-        cargoWeight = inCargoWeight;
-    }
-    //Base toString
-    public String toString(){
-            String result = "";
-            result = "Brand : \t" + getBrand() + "\n" +
-            "Speed (mph): \t" + getSpeed() + "\n" +
-            "Passengers: \t" + getPassengers() + "\n" +
-            "Cargo (lbs): \t" + getCargoWeight() + "\n\n";
-        return result;
+
+    public double getCargoWeight() { return cargoWeight; }
+    public void setCargoWeight(double cargo) { this.cargoWeight = cargo; }
+
+    public String toString() {
+        return "Brand:\t\t" + brandName + "\n" +
+               "Speed (mph):\t" + getSpeed() + "\n" +
+               "Passengers:\t" + passengers + "\n" +
+               "Cargo (lbs):\t" + cargoWeight + "\n";
     }
 }
 
-//the Speedometer interface to show the speed of any vehicle in the same way
-interface Speedometer{
-    public void setSpeed(double inSpeed);
-    public double getSpeed();
-}
+//Car class
+class Car extends Vehicle {
+    protected int wheels = 4;
+    protected String color;
+    protected boolean spoiler = false;
+    protected boolean stereo = false;
+    protected double mpg;
 
-// Car Class inherits from Vehicle Class
-class Car extends Vehicle{
-    int wheels = 4;
-    String color = "White";
-    boolean spoiler = false;
-    boolean stereo = false;
-    double mpg = 0.0; //has an extra variable, mpg
+    public Car(String brand, double speed, int passengers, double cargo, double mpg, String color) {
+        super(brand, speed, passengers, cargo);
+        this.mpg = mpg;
+        this.color = color;
+    }
 
-    public Car(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
-        super(inBrand, inSpeed, inPassengers, inCargo);
-        mpg = inMPG;
-        color = inColor;
-    }
-    public void setSpoiler(boolean inSpoiler){
-        spoiler = inSpoiler;
-    }
-    public boolean getSpoiler(){
-        return spoiler;
-    }
-    //another additional variable
-    public void setStereo(boolean inStereo){
-        stereo = inStereo;
-    }
-    public boolean getStereo(){
-        return stereo;
-    }
-    //overrides the super getSpeed method
+    public void setSpoiler(boolean spoiler) { this.spoiler = spoiler; }
+    public void setStereo(boolean stereo) { this.stereo = stereo; }
+
     @Override
     public double getSpeed() {
-        if (spoiler)
-            return super.getSpeed() + 20;
-        else
-            return super.getSpeed();
+        return spoiler ? super.getSpeed() + 20 : super.getSpeed();
     }
 
-    public void setMpg(double mpg) {
-        this.mpg = mpg;
+    public double getMPG() {
+        return stereo ? mpg * 0.9 : mpg;
     }
 
-    public double getMPG(){
-        if(stereo)
-            return mpg - (mpg / 10);
-        else
-            return mpg;
-    }
-    //usesd the super toString, as well as adding the new variable to it.
-    public String toString(){
-        String result = super.toString() +
-            "MPG :\t\t" + this.getMPG();
-        return result;
+    public String toString() {
+        return super.toString() +
+               "Color:\t\t" + color + "\n" +
+               "MPG:\t\t" + getMPG() + "\n";
     }
 }
 
-class EV extends Car{
-    int wheels = 4;
-    public EV(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor){
-        super(inBrand, inSpeed, inPassengers, inCargo, inMPG, inColor);
+//Electric Vehicle class that inherits from car and vehicle
+class EV extends Car {
+    private double range;
+
+    public EV(String brand, double speed, int passengers, double cargo, double mpg, String color, double range) {
+        super(brand, speed, passengers, cargo, mpg, color);
+        this.range = range;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tEV\n" +
+               "Range:\t\t" + range + " miles\n";
     }
 }
 
-class MagicSchoolBus extends Car{
-    int wheels = 6;
-    public MagicSchoolBus(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG, String inColor, String minSize, String maxSize){
-        super(inBrand, inSpeed, inPassengers, inCargo, inMPG, inColor);
+//Magic School Bus  class that inherits from car and vehicle
+class MagicSchoolBus extends Car {
+    private String minSize, maxSize;
+
+    public MagicSchoolBus(String brand, double speed, int passengers, double cargo, double mpg, String color, String minSize, String maxSize) {
+        super(brand, speed, passengers, cargo, mpg, color);
+        this.minSize = minSize;
+        this.maxSize = maxSize;
+    }
+
+    @Override
+    public double getSpeed() {
+        return super.getSpeed() + 100;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tMagic School Bus\n" +
+               "Size Range:\t" + minSize + " to " + maxSize + "\n";
     }
 }
 
-class Boat extends Vehicle{
-    String color = "white";
-    boolean sail = false;
-    public Boat(String inBrand, double inSpeed, int inPassengers, double inCargo, boolean inSail){
-        super(inBrand, inSpeed, inPassengers, inCargo);
-        sail = inSail;
-    }
-    
-    public String toString(){
-        String result = super.toString();
-        return result;
-    }
-}
+//Boat class that inherits from vehicle only
+class Boat extends Vehicle {
+    protected boolean sail;
 
-class RowBoat extends Boat{
-    int oars = 0;
-    public RowBoat(String inBrand, double inSpeed, int inPassengers, double inCargo, boolean inSail, int inOars){
-        super(inBrand, inSpeed, inPassengers, inCargo, inSail);
-        oars = inOars;
+    public Boat(String brand, double speed, int passengers, double cargo, boolean sail) {
+        super(brand, speed, passengers, cargo);
+        this.sail = sail;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Sail:\t\t" + sail + "\n";
     }
 }
-class Airplane extends Vehicle{
- //   int 
+
+//RowBoat class that inherits from boat and vehicle
+class RowBoat extends Boat {
+    private int oars;
+
+    public RowBoat(String brand, double speed, int passengers, double cargo, boolean sail, int oars) {
+        super(brand, speed, passengers, cargo, sail);
+        this.oars = oars;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tRowBoat\n" +
+               "Oars:\t\t" + oars + "\n";
+    }
 }
 
-class Spaceship extends Airplane{
-    
+//Cruise Ship class that inherits from boat and vehicle
+class CruiseShip extends Boat {
+    private int decks;
+
+    public CruiseShip(String brand, double speed, int passengers, double cargo, boolean sail, int decks) {
+        super(brand, speed, passengers, cargo, sail);
+        this.decks = decks;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tCruise Ship\n" +
+               "Decks:\t\t" + decks + "\n";
+    }
 }
 
-class ___ extends Vehicle{
-    
+//Airplane class that inherits from vehicle only
+class Airplane extends Vehicle {
+    public Airplane(String brand, double speed, int passengers, double cargo) {
+        super(brand, speed, passengers, cargo);
+    }
 }
 
-class Train extends Vehicle{
-    String powerType = "";
-    public Train(String inBrand, double inSpeed, int inPassenger, double inCargo, String inPower){
-        super(inBrand, inSpeed, inPassenger, inCargo);
-        powerType = inPower;
+//Fighter Jet class that inherits from airplane and vehicle
+class FighterJet extends Airplane {
+    private int missiles;
+
+    public FighterJet(String brand, double speed, int passengers, double cargo, int missiles) {
+        super(brand, speed, passengers, cargo);
+        this.missiles = missiles;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tFighter Jet\n" +
+               "Missiles:\t" + missiles + "\n";
+    }
+}
+
+//Blimp class that inherits from airplane and vehicle
+class Blimp extends Airplane {
+    private double heliumVolume;
+
+    public Blimp(String brand, double speed, int passengers, double cargo, double heliumVolume) {
+        super(brand, speed, passengers, cargo);
+        this.heliumVolume = heliumVolume;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tBlimp\n" +
+               "Helium Volume:\t" + heliumVolume + " cu ft\n";
+    }
+}
+
+//Spaceship class that inherits from vehicle only
+class Spaceship extends Vehicle {
+    private boolean warpDrive;
+
+    public Spaceship(String brand, double speed, int passengers, double cargo, boolean warpDrive) {
+        super(brand, speed, passengers, cargo);
+        this.warpDrive = warpDrive;
+    }
+
+    @Override
+    public double getSpeed() {
+        return warpDrive ? super.getSpeed() * 10 : super.getSpeed();
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tSpaceship\n" +
+               "Warp Drive:\t" + warpDrive + "\n";
+    }
+}
+
+//Train class that inherits from vehicle only
+class Train extends Vehicle {
+    private String powerType;
+
+    public Train(String brand, double speed, int passengers, double cargo, String powerType) {
+        super(brand, speed, passengers, cargo);
+        this.powerType = powerType;
+    }
+
+    public String toString() {
+        return super.toString() +
+               "Type:\t\tTrain\n" +
+               "Power:\t\t" + powerType + "\n";
     }
 }
