@@ -1,0 +1,116 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class ContactsSortedAnt {
+
+    public static void main(String[] args) {
+        String input;
+        String name;
+        String gradYear;
+        String username;
+        String email;
+        Scanner scan = new Scanner(System.in);
+        String csvFilePath = "Contacts/contacts.csv";
+        ArrayList<Contacts> contactDetails = new ArrayList<>();
+        System.out.println("Enter a to beging adding contacts. Enter any other characters to move on");
+        input = scan.next();
+        while (input.equals("a")) {
+            System.out.println("Enter your name.");
+            name = scan.next();
+            System.out.println("Enter your email address.");
+            email = scan.next();
+            System.out.println("Enter your graduation year.");
+            gradYear = scan.next();
+            System.out.println("Enter your username.");
+            username = scan.next();
+            Contacts person = new Contacts(name, email, gradYear, username);
+            System.out.println("Enter a if you'd like to continue adding contacts, or any other character to move on.");
+            contactDetails.add(person);
+            input = scan.next();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))){
+            for (Contacts c : contactDetails){
+                writer.write(c.toCSV());
+                writer.newLine();
+            }
+        
+        } catch (IOException e) {
+            System.err.println("Error writing to CSV file: " + e.getMessage());
+        }
+        
+        List<Contacts> list = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("Contacts/contacts.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                
+                list.add(new Contacts(values[0], values[1], values[2], values[3]));
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to CSV file: " + e.getMessage());
+        }
+      
+        
+        System.out.println("Enter e to sort by email, y to sort by grad year, and n to sort by name");
+        String sortBy = scan.next();
+
+        switch (sortBy.toLowerCase()) {
+            case "n":
+                list.sort(Comparator.comparing(Contacts::getName, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "e":
+                list.sort(Comparator.comparing(Contacts::getEmail, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "y":
+                list.sort(Comparator.comparing(Contacts::getGradYear));
+                break;
+        }
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i).toCSV());
+        }
+    }    
+}
+    
+   
+class Contacts{
+    String name;
+    String email;
+    String year;
+    String user;
+    public Contacts(String inName, String inEmail, String inYear, String inUser){
+        name = inName;
+        email = inEmail;
+        year = inYear;
+        user = inUser;
+    }
+    public Contacts(){}
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getGradYear() {
+        return year;
+    }
+    public String getUsername() {
+        return user;
+    }
+    
+    public String toCSV() {
+        return String.join(",", 
+            name, 
+            email, 
+            year,
+            user
+        );
+    }
+}
