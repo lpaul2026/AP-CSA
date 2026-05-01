@@ -1,3 +1,6 @@
+package superheroproject;
+import java.util.*;
+import java.io.*;
 public class SuperheroProject {
 
     /**
@@ -11,9 +14,10 @@ public class SuperheroProject {
         Power invisibility = new Power("Invisibility", false, 85);
         Power smart = new Power("SuperSmartness", false, 70);
         Power animalComms = new Power("AnimalCommunication", true, 75);
-        Superhero chosenSuperhero = new Superhero(strength, "", "", "", 0, 0, 0);
-        String choice;
+        
+        String choice = "";
         String superChoicePath = "choices/superhero.txt";
+        
         
         Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
         Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
@@ -30,48 +34,67 @@ public class SuperheroProject {
         System.out.println("Please enter the name of the superhero you wish to select.");
         choice = scan.next();
         
-        switch(choice){
-            case "behemoth":
-                chosenSuperhero = behemoth;
-                break;
-            case "canary":
-                chosenSuperhero = canary;
-                break;
-            case "phasr":
-                chosenSuperhero = phasr;
-                break;
-            case "cyfer":
-                chosenSuperhero = cyfer;
-                break;
-            case "leopard":
-                chosenSuperhero = leopard;
-                break;
-        }
+        // 
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(superChoicePath, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(superChoicePath))) {
    //writer.write(contentToWrite);
-            writer.append(chosenSuperhero + "\n");
+            writer.append(choice + "\n");
             System.out.println("Successfully wrote to the file.");
         } 
         catch (IOException e) {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
         }
-// Read from file
-        try (BufferedReader reader = new BufferedReader(new FileReader(superChoicePath))) {
-            String line;
-            System.out.println("\nReading from the file:");
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } 
-        catch (IOException e) {
-        System.err.println("An error occurred while reading from the file: " + e.getMessage());
-        }
+
     }
 }
 
+class Actions{
+    Power placeholder = new Power("", false, 0);
+    Superhero chosenSuperhero = new Superhero(placeholder, "", "", "", 0, 0, 0);
+    String superH = "";
+    String superChoicePath = "choices/superhero.txt";
+    
+    Power strength = new Power("SuperStrength", false, 70);
+    Power flight = new Power("Flight", true, 65);
+    Power invisibility = new Power("Invisibility", false, 85);
+    Power smart = new Power("SuperSmartness", false, 70);
+    Power animalComms = new Power("AnimalCommunication", true, 75);
+    
+    Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
+    Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
+    Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90);
+    Superhero cyfer = new Superhero(smart, "Cyfer", "Pollen", "Running", 40, 50, 150);
+    Superhero leopard = new Superhero(animalComms, "Leopard Linguist", "People", "Dark", 70, 55, 80);
+    public String EasyAction(){
+        try (BufferedReader reader = new BufferedReader(new FileReader(superChoicePath))) {
+            superH = reader.readLine();
+            switch(superH){
+               case "behemoth":
+                  chosenSuperhero = behemoth;
+                  break;
+               case "canary":
+                  chosenSuperhero = canary;
+                  break;
+               case "phasr":
+                  chosenSuperhero = phasr;
+                  break;
+               case "cyfer":
+                  chosenSuperhero = cyfer;
+                  break;
+              case "leopard":
+                  chosenSuperhero = leopard;
+                  break;
+           }
+        } 
+        catch (IOException e) {
+            System.err.println("An error occurred while reading from the file: " + e.getMessage());
+        }
+    return easyAction;
+    }
+}
+/*
 
-
+*/
 class Superhero{
     private Power power;
     private String name;
@@ -93,9 +116,9 @@ class Superhero{
     }
     
     //public Power GetPower(){
- //       String result = power.GetEfficacy() + power.GetName() + power.GetEfficacy();
- //       return result;
-   // }
+    //  String result = power.GetEfficacy() + power.GetName() + power.GetEfficacy();
+    //  return result;
+    //}
     
     public String GetName(){
         return name;
