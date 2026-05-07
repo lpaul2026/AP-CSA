@@ -1,182 +1,493 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 package superheroproject;
+
+/**
+ *
+ * @author lizmp
+ */
+
+
 import java.util.*;
 import java.io.*;
+
 public class SuperheroProject {
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        Power strength = new Power("SuperStrength", false, 70);
+
+       
+        Power strength = new Power("Super Strength", false, 70);
         Power flight = new Power("Flight", true, 65);
         Power invisibility = new Power("Invisibility", false, 85);
-        Power smart = new Power("SuperSmartness", false, 70);
-        Power animalComms = new Power("AnimalCommunication", true, 75);
-        
-        String choice = "";
-        String superChoicePath = "choices/superhero.txt";
-        
-        
-        Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
-        Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
-        Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90);
-        Superhero cyfer = new Superhero(smart, "Cyfer", "Pollen", "Running", 40, 50, 150);
-        Superhero leopard = new Superhero(animalComms, "Leopard Linguist", "People", "Dark", 70, 55, 80);
-       
-        System.out.println(behemoth);
-        System.out.println(canary);
-        System.out.println(phasr);
-        System.out.println(cyfer);
-        System.out.println(leopard);
-        
-        System.out.println("Please enter the name of the superhero you wish to select.");
-        choice = scan.next();
-        
-        // 
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(superChoicePath))) {
-   //writer.write(contentToWrite);
-            writer.append(choice + "\n");
-            System.out.println("Successfully wrote to the file.");
-        } 
-        catch (IOException e) {
-            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        Power smart = new Power("Super Intelligence", false, 90);
+        Power animalComms = new Power("Animal Communication", true, 75);
+
+
+        Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 80, 150,40, 120);
+
+        Superhero canary = new Superhero( flight, "Crimefighting Canary", "Water", "Smoke", 50, 75,80,100);
+
+        Superhero phasr = new Superhero(
+                invisibility,
+                "Phasr",
+                "Ego",
+                "Papaya",
+                30,
+                80,
+                90,
+                90
+        );
+
+        Superhero cyfer = new Superhero(
+                smart,
+                "Cyfer",
+                "Pollen",
+                "Running",
+                40,
+                50,
+                150,
+                85
+        );
+
+        Superhero leopard = new Superhero(
+                animalComms,
+                "Leopard Linguist",
+                "People",
+                "Darkness",
+                70,
+                55,
+                80,
+                95
+        );
+
+        //choosing the hero
+
+        System.out.println("=================================");
+        System.out.println("City Defenders");
+        System.out.println("=================================");
+
+        System.out.println("\nChoose your superhero:\n");
+
+        System.out.println("1. " + behemoth.GetName());
+        System.out.println("2. " + canary.GetName());
+        System.out.println("3. " + phasr.GetName());
+        System.out.println("4. " + cyfer.GetName());
+        System.out.println("5. " + leopard.GetName());
+
+        int choice = scan.nextInt();
+
+        Superhero player = null;
+
+        switch(choice) {
+
+            case 1:
+                player = behemoth;
+                break;
+
+            case 2:
+                player = canary;
+                break;
+
+            case 3:
+                player = phasr;
+                break;
+
+            case 4:
+                player = cyfer;
+                break;
+
+            case 5:
+                player = leopard;
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+                System.exit(0);
+        }
+
+        saveHero(player.GetName());
+
+        System.out.println("\nYou selected:");
+        System.out.println(player);
+
+        // =========================
+        // MISSIONS
+        // =========================
+
+        Mission mission1 = new Mission(
+                "Bank Robbery",
+                180,
+                20
+        );
+
+        Mission mission2 = new Mission(
+                "Rescue the Mayor",
+                200,
+                25
+        );
+
+        Mission mission3 = new Mission(
+                "Stop the Train Crash",
+                230,
+                30
+        );
+
+        Mission mission4 = new Mission(
+                "Defeat the Giant Robot",
+                260,
+                35
+        );
+
+        Mission mission5 = new Mission(
+                "Save the City Power Grid",
+                280,
+                40
+        );
+
+        playMission(player, mission1);
+        playMission(player, mission2);
+        playMission(player, mission3);
+        playMission(player, mission4);
+        playMission(player, mission5);
+
+        // =========================
+        // FINAL BOSS
+        // =========================
+
+        Villain finalBoss = new Villain(
+                "Doctor Oblivion",
+                350
+        );
+
+        System.out.println("\n=================================");
+        System.out.println(" FINAL BATTLE");
+        System.out.println("=================================");
+
+        System.out.println("\nThe evil " + finalBoss.GetName() + " appears!");
+
+        int heroPower =
+                player.GetStrength()
+                + player.GetStamina()
+                + player.GetIntelligence()
+                + player.GetExperience();
+
+        System.out.println("\nYour total power: " + heroPower);
+        System.out.println(finalBoss.GetName() + "'s power: "
+                + finalBoss.GetPowerLevel());
+
+        if(heroPower >= finalBoss.GetPowerLevel()) {
+
+            System.out.println("\nYOU SAVED THE CITY!");
+            System.out.println("YOU WIN!");
+
+        }
+        else {
+
+            System.out.println("\nYou fought bravely...");
+            System.out.println("BUT THE CITY HAS FALLEN.");
         }
 
     }
-}
 
-class Actions{
-    Power placeholder = new Power("", false, 0);
-    Superhero chosenSuperhero = new Superhero(placeholder, "", "", "", 0, 0, 0);
-    String superH = "";
-    String superChoicePath = "choices/superhero.txt";
-    
-    Power strength = new Power("SuperStrength", false, 70);
-    Power flight = new Power("Flight", true, 65);
-    Power invisibility = new Power("Invisibility", false, 85);
-    Power smart = new Power("SuperSmartness", false, 70);
-    Power animalComms = new Power("AnimalCommunication", true, 75);
-    
-    Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
-    Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
-    Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90);
-    Superhero cyfer = new Superhero(smart, "Cyfer", "Pollen", "Running", 40, 50, 150);
-    Superhero leopard = new Superhero(animalComms, "Leopard Linguist", "People", "Dark", 70, 55, 80);
-    public String EasyAction(){
-        try (BufferedReader reader = new BufferedReader(new FileReader(superChoicePath))) {
-            superH = reader.readLine();
-            switch(superH){
-               case "behemoth":
-                  chosenSuperhero = behemoth;
-                  break;
-               case "canary":
-                  chosenSuperhero = canary;
-                  break;
-               case "phasr":
-                  chosenSuperhero = phasr;
-                  break;
-               case "cyfer":
-                  chosenSuperhero = cyfer;
-                  break;
-              case "leopard":
-                  chosenSuperhero = leopard;
-                  break;
-           }
-        } 
-        catch (IOException e) {
-            System.err.println("An error occurred while reading from the file: " + e.getMessage());
+    // =========================
+    // SAVE HERO TO FILE
+    // =========================
+
+    public static void saveHero(String heroName) {
+
+        try {
+
+            File folder = new File("choices");
+
+            if(!folder.exists()) {
+                folder.mkdir();
+            }
+
+            BufferedWriter writer =
+                    new BufferedWriter(
+                            new FileWriter("choices/superhero.txt")
+                    );
+
+            writer.write(heroName);
+
+            writer.close();
+
+            System.out.println("\nHero saved successfully.");
+
         }
-    return easyAction;
+        catch(IOException e) {
+
+            System.out.println("Error saving hero.");
+        }
+    }
+
+    // =========================
+    // PLAY MISSION
+    // =========================
+
+    public static void playMission(
+            Superhero hero,
+            Mission mission
+    ) {
+
+        System.out.println("\n=================================");
+        System.out.println("MISSION: " + mission.GetMissionName());
+        System.out.println("=================================");
+
+        System.out.println("\n1. Charge in aggressively");
+        System.out.println("2. Make a strategic plan");
+
+        int choice = scan.nextInt();
+
+        int heroPower =
+                hero.GetStrength()
+                + hero.GetStamina()
+                + hero.GetIntelligence();
+
+        // strategy bonus
+        if(choice == 2) {
+            heroPower += 20;
+        }
+
+        if(heroPower >= mission.GetDifficulty()) {
+
+            System.out.println("\nMISSION SUCCESSFUL!");
+
+            hero.AddExperience(
+                    mission.GetRewardXP()
+            );
+
+            System.out.println(
+                    "Gained "
+                    + mission.GetRewardXP()
+                    + " XP!"
+            );
+
+        }
+        else {
+
+            System.out.println("\nMISSION FAILED!");
+
+            hero.TakeDamage(15);
+
+            System.out.println(
+                    "You lost 15 health."
+            );
+        }
+
+        System.out.println(
+                "Current Health: "
+                + hero.GetHealth()
+        );
+
+        System.out.println(
+                "Current XP: "
+                + hero.GetExperience()
+        );
     }
 }
-/*
 
-*/
-class Superhero{
+// ======================================
+// SUPERHERO CLASS
+// ======================================
+
+class Superhero {
+
     private Power power;
+
     private String name;
+
     private String weakness1;
     private String weakness2;
+
     private int strength;
     private int stamina;
     private int intelligence;
-    private boolean sidekick;
-    
-    public Superhero(Power inPower, String inName, String inWeakness1, String inWeakness2, int inStrength, int inStamina, int inIntelligence){
+
+    private int health;
+    private int experience;
+
+    public Superhero(
+            Power inPower,
+            String inName,
+            String inWeakness1,
+            String inWeakness2,
+            int inStrength,
+            int inStamina,
+            int inIntelligence,
+            int inHealth
+    ) {
+
         power = inPower;
+
         name = inName;
+
         weakness1 = inWeakness1;
         weakness2 = inWeakness2;
+
         strength = inStrength;
         stamina = inStamina;
         intelligence = inIntelligence;
+
+        health = inHealth;
+
+        experience = 0;
     }
-    
-    //public Power GetPower(){
-    //  String result = power.GetEfficacy() + power.GetName() + power.GetEfficacy();
-    //  return result;
-    //}
-    
-    public String GetName(){
+
+    public String GetName() {
         return name;
     }
-    
-    public String GetWeakness1(){
-        return weakness1;
-    }
-    
-    public String GetWeakness2(){
-        return weakness2;
-    }
-    
-    public int GetStrength(){
+
+    public int GetStrength() {
         return strength;
     }
-    
-    public int GetStamina(){
+
+    public int GetStamina() {
         return stamina;
     }
-    
-    public int GetIntelligence(){
+
+    public int GetIntelligence() {
         return intelligence;
     }
-    
-    public boolean SidekickRequired(){
-        if(power.GetSocial() == true){
-            sidekick = true;
-        }
-        else{
-            sidekick = false;
-        }
-        return sidekick;    
+
+    public int GetHealth() {
+        return health;
     }
-    public String toString(){
-        String result = "";
-        result = name + " is Novus Vetus City's superhero. Their power is " + power.GetName() + ". Their strength, stamina, and intelligence levels are "
-        + strength + ", " + stamina + ", " + intelligence + " respectively. Their weaknesses are " + weakness1 + " and " + weakness2;
-    return result;
+
+    public int GetExperience() {
+        return experience;
+    }
+
+    public void AddExperience(int xp) {
+        experience += xp;
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+    }
+
+    public String toString() {
+
+        return "\n"
+                + name
+                + "\nPower: "
+                + power.GetName()
+                + "\nStrength: "
+                + strength
+                + "\nStamina: "
+                + stamina
+                + "\nIntelligence: "
+                + intelligence
+                + "\nWeaknesses: "
+                + weakness1
+                + ", "
+                + weakness2;
     }
 }
 
+// ======================================
+// POWER CLASS
+// ======================================
 
+class Power {
 
-class Power{
-    private boolean social;
-    private int efficacyRate;
     private String name;
-    public Power(String inName, boolean inSocial, int inEfficacyRate){
+
+    private boolean social;
+
+    private int efficacyRate;
+
+    public Power(
+            String inName,
+            boolean inSocial,
+            int inEfficacyRate
+    ) {
+
         name = inName;
         social = inSocial;
         efficacyRate = inEfficacyRate;
     }
-    public String GetName(){
+
+    public String GetName() {
         return name;
     }
-    public boolean GetSocial(){
+
+    public boolean GetSocial() {
         return social;
+    }
+
+    public int GetEfficacy() {
+        return efficacyRate;
+    }
+}
+
+// ======================================
+// MISSION CLASS
+// ======================================
+
+class Mission {
+
+    private String missionName;
+
+    private int difficulty;
+
+    private int rewardXP;
+
+    public Mission(
+            String inMissionName,
+            int inDifficulty,
+            int inRewardXP
+    ) {
+
+        missionName = inMissionName;
+        difficulty = inDifficulty;
+        rewardXP = inRewardXP;
+    }
+
+    public String GetMissionName() {
+        return missionName;
+    }
+
+    public int GetDifficulty() {
+        return difficulty;
+    }
+
+    public int GetRewardXP() {
+        return rewardXP;
+    }
+}
+
+// ======================================
+// VILLAIN CLASS
+// ======================================
+
+class Villain {
+
+    private String name;
+
+    private int powerLevel;
+
+    public Villain(
+            String inName,
+            int inPowerLevel
+    ) {
+
+        name = inName;
+        powerLevel = inPowerLevel;
+    }
+
+    public String GetName() {
+        return name;
+    }
+
+    public int GetPowerLevel() {
+        return powerLevel;
+    }
+}
     }
     public int GetEfficacy(){
         return efficacyRate;
