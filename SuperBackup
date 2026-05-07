@@ -1,0 +1,184 @@
+package superheroproject;
+import java.util.*;
+import java.io.*;
+public class SuperheroProject {
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Power strength = new Power("SuperStrength", false, 70);
+        Power flight = new Power("Flight", true, 65);
+        Power invisibility = new Power("Invisibility", false, 85);
+        Power smart = new Power("SuperSmartness", false, 70);
+        Power animalComms = new Power("AnimalCommunication", true, 75);
+        
+        String choice = "";
+        String superChoicePath = "choices/superhero.txt";
+        
+        
+        Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
+        Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
+        Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90);
+        Superhero cyfer = new Superhero(smart, "Cyfer", "Pollen", "Running", 40, 50, 150);
+        Superhero leopard = new Superhero(animalComms, "Leopard Linguist", "People", "Dark", 70, 55, 80);
+       
+        System.out.println(behemoth);
+        System.out.println(canary);
+        System.out.println(phasr);
+        System.out.println(cyfer);
+        System.out.println(leopard);
+        
+        System.out.println("Please enter the name of the superhero you wish to select.");
+        choice = scan.next();
+        
+        // 
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(superChoicePath))) {
+   //writer.write(contentToWrite);
+            writer.append(choice + "\n");
+            System.out.println("Successfully wrote to the file.");
+        } 
+        catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        }
+
+    }
+}
+
+class Actions{
+    Power placeholder = new Power("", false, 0);
+    Superhero chosenSuperhero = new Superhero(placeholder, "", "", "", 0, 0, 0);
+    String superH = "";
+    String superChoicePath = "choices/superhero.txt";
+    
+    Power strength = new Power("SuperStrength", false, 70);
+    Power flight = new Power("Flight", true, 65);
+    Power invisibility = new Power("Invisibility", false, 85);
+    Power smart = new Power("SuperSmartness", false, 70);
+    Power animalComms = new Power("AnimalCommunication", true, 75);
+    
+    Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 150, 80, 40);
+    Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80);
+    Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90);
+    Superhero cyfer = new Superhero(smart, "Cyfer", "Pollen", "Running", 40, 50, 150);
+    Superhero leopard = new Superhero(animalComms, "Leopard Linguist", "People", "Dark", 70, 55, 80);
+    public String EasyAction(){
+        try (BufferedReader reader = new BufferedReader(new FileReader(superChoicePath))) {
+            superH = reader.readLine();
+            switch(superH){
+               case "behemoth":
+                  chosenSuperhero = behemoth;
+                  break;
+               case "canary":
+                  chosenSuperhero = canary;
+                  break;
+               case "phasr":
+                  chosenSuperhero = phasr;
+                  break;
+               case "cyfer":
+                  chosenSuperhero = cyfer;
+                  break;
+              case "leopard":
+                  chosenSuperhero = leopard;
+                  break;
+           }
+        } 
+        catch (IOException e) {
+            System.err.println("An error occurred while reading from the file: " + e.getMessage());
+        }
+    return easyAction;
+    }
+}
+/*
+
+*/
+class Superhero{
+    private Power power;
+    private String name;
+    private String weakness1;
+    private String weakness2;
+    private int strength;
+    private int stamina;
+    private int intelligence;
+    private boolean sidekick;
+    
+    public Superhero(Power inPower, String inName, String inWeakness1, String inWeakness2, int inStrength, int inStamina, int inIntelligence){
+        power = inPower;
+        name = inName;
+        weakness1 = inWeakness1;
+        weakness2 = inWeakness2;
+        strength = inStrength;
+        stamina = inStamina;
+        intelligence = inIntelligence;
+    }
+    
+    //public Power GetPower(){
+    //  String result = power.GetEfficacy() + power.GetName() + power.GetEfficacy();
+    //  return result;
+    //}
+    
+    public String GetName(){
+        return name;
+    }
+    
+    public String GetWeakness1(){
+        return weakness1;
+    }
+    
+    public String GetWeakness2(){
+        return weakness2;
+    }
+    
+    public int GetStrength(){
+        return strength;
+    }
+    
+    public int GetStamina(){
+        return stamina;
+    }
+    
+    public int GetIntelligence(){
+        return intelligence;
+    }
+    
+    public boolean SidekickRequired(){
+        if(power.GetSocial() == true){
+            sidekick = true;
+        }
+        else{
+            sidekick = false;
+        }
+        return sidekick;    
+    }
+    public String toString(){
+        String result = "";
+        result = name + " is Novus Vetus City's superhero. Their power is " + power.GetName() + ". Their strength, stamina, and intelligence levels are "
+        + strength + ", " + stamina + ", " + intelligence + " respectively. Their weaknesses are " + weakness1 + " and " + weakness2;
+    return result;
+    }
+}
+
+
+
+class Power{
+    private boolean social;
+    private int efficacyRate;
+    private String name;
+    public Power(String inName, boolean inSocial, int inEfficacyRate){
+        name = inName;
+        social = inSocial;
+        efficacyRate = inEfficacyRate;
+    }
+    public String GetName(){
+        return name;
+    }
+    public boolean GetSocial(){
+        return social;
+    }
+    public int GetEfficacy(){
+        return efficacyRate;
+    }
+}
