@@ -14,7 +14,7 @@ public class Test {
         Power animalComms = new Power("Animal Communication", true, 75);
 
         Superhero behemoth = new Superhero(strength, "Benevolent Behemoth", "Cheese", "Heights", 80, 150, 40, 120);
-        Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Smoke", 50, 75, 80, 100);
+        Superhero canary = new Superhero(flight, "Crimefighting Canary", "Water", "Animals", 50, 75, 80, 100);
         Superhero phasr = new Superhero(invisibility, "Phasr", "Ego", "Papaya", 30, 80, 90, 90);
         Superhero cyfer = new Superhero(smart,"Cyfer","Pollen","Running",40,50,150,85);
         Superhero leopard = new Superhero(animalComms,"Leopard Linguist","People","Darkness",70,55,80,95);
@@ -141,17 +141,53 @@ public class Test {
         System.out.println("MISSION: " + mission.GetMissionName());
         System.out.println("=================================");
         System.out.println("\n1. Use aggression and physical force");
-        System.out.println("2. ");
-        System.out.println("3. ");
+        System.out.println("2. Use sneaking powers");
+        System.out.println("3. Create a device that remotely completes the task");
+        System.out.println("4. Converse with your animal friends");
+        System.out.println("5. Intercept the perpetrator from a high point");
         int choice = scan.nextInt();
         int heroPower = hero.GetStrength() + hero.GetStamina() + hero.GetIntelligence();
         // strategy bonus
-        if (choice == 1) {
+        if(choice == 1) {
             if(hero.GetStrength() >= 80){
                 heroPower += 20;
             }
             else if(hero.GetStrength() <= 40){
                 heroPower -= 20;
+            }
+        }
+        else if(choice == 2){
+            if(hero.GetIntelligence() >= 80){
+                heroPower += 20;
+            }
+            else if(hero.GetIntelligence() <= 40){
+                heroPower -= 20;
+        }
+        else if(choice == 3){
+            if(hero.GetIntelligence() >= 40){
+                heroPower += 20;
+            }
+            if(hero.GetWeakness1().equals("Darkness") || hero.GetWeakness2().equals("Darkness")){
+                hero.TakeDamage(50);
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
+            }
+        }
+        else if(choice == 4){
+            if(hero.GetName().equals("Leopard Linguist")){
+                heroPower += 20;
+            }
+            if(hero.GetWeakness1().equals("Animals") || hero.GetWeakness2().equals("Animals")){
+                hero.TakeDamage(50);
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
+            }
+        }
+        else if(choice == 5){
+            if(hero.GetName().equals("Crimefighting Canary")){
+                heroPower += 20;
+            }
+            if(hero.GetWeakness1().equals("Heights") || hero.GetWeakness2().equals("Heights")){
+                hero.TakeDamage(50);
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
             }
         }
         if (heroPower >= mission.GetDifficulty()) {
@@ -180,17 +216,7 @@ class Superhero {
     private int intelligence;
     private int health;
     private int experience;
-    public Superhero(
-            Power inPower,
-            String inName,
-            String inWeakness1,
-            String inWeakness2,
-            int inStrength,
-            int inStamina,
-            int inIntelligence,
-            int inHealth
-    ) {
-
+    public Superhero(Power inPower, String inName, String inWeakness1, String inWeakness2, int inStrength, int inStamina, int inIntelligence, int inHealth) {
         power = inPower;
         name = inName;
         weakness1 = inWeakness1;
@@ -203,6 +229,12 @@ class Superhero {
     }
     public String GetName() {
         return name;
+    }
+    public String GetWeakness1() {
+        return weakness1;
+    }
+    public String GetWeakness2() {
+        return weakness2;
     }
     public int GetStrength() {
         return strength;
@@ -234,11 +266,7 @@ class Power {
     private String name;
     private boolean social;
     private int efficacyRate;
-    public Power(
-            String inName,
-            boolean inSocial,
-            int inEfficacyRate
-    ) {
+    public Power(String inName, boolean inSocial, int inEfficacyRate) {
         name = inName;
         social = inSocial;
         efficacyRate = inEfficacyRate;
@@ -259,7 +287,6 @@ class Mission {
     private int difficulty;
     private int rewardXP;
     public Mission(String inMissionName,int inDifficulty,int inRewardXP) {
-
         missionName = inMissionName;
         difficulty = inDifficulty;
         rewardXP = inRewardXP;
