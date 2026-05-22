@@ -62,7 +62,7 @@ public class Test {
                 System.exit(0);
         }
 
-        saveHero(player.GetName());
+        saveHeroName(player.GetName());
 
         System.out.println("\nYou selected:");
         System.out.println(player);
@@ -102,33 +102,36 @@ public class Test {
             System.out.println("\nYou fought bravely...");
             System.out.println("BUT THE CITY HAS FALLEN.");
         }
-
+        saveHeroStatus(player.GetName(), player.GetHealth());
+        getHeroStatus();
     }
 
     // SAVE HERO TO FILE
-    public static void saveHero(String heroName) {
-
+    public static void saveHeroName(String heroName) {
         try {
-
             File folder = new File("choices");
-
             if (!folder.exists()) {
                 folder.mkdir();
             }
-
-            BufferedWriter writer
-                    = new BufferedWriter(
-                            new FileWriter("choices/superhero.txt")
-                    );
-
+            BufferedWriter writer = new BufferedWriter(new FileWriter("choices/superheroName.txt"));
             writer.write(heroName);
-
             writer.close();
-
             System.out.println("\nHero saved successfully.");
-
         } catch (IOException e) {
-
+            System.out.println("Error saving hero.");
+        }
+    }   
+    public static void saveHeroStatus(String heroName, int health) {
+        try {
+            File folder = new File("choices");
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter("choices/superheroHealth.txt"));
+            writer.write(String.valueOf(health));
+            writer.close();
+            System.out.println("\nHero saved successfully.");
+        } catch (IOException e) {
             System.out.println("Error saving hero.");
         }
     }
@@ -162,6 +165,7 @@ public class Test {
             }
             else if(hero.GetIntelligence() <= 40){
                 heroPower -= 20;
+            }
         }
         else if(choice == 3){
             if(hero.GetIntelligence() >= 40){
@@ -204,6 +208,20 @@ public class Test {
         System.out.println("Current Health: " + hero.GetHealth());
 
         System.out.println("Current XP: " + hero.GetExperience());
+        saveHeroStatus(hero.GetName(), hero.GetHealth());
+    }
+    public static void getHeroStatus(){
+        try(BufferedReader br = new BufferedReader(new FileReader("choices/superheroHealth.txt"))){
+            String line;
+            while ((line = br.readLine()) != null){
+                if(Integer.parseInt(line) >= 50){
+                    System.out.println("Congratulations! You are a very well qualified superhero!");
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
 class Superhero {
