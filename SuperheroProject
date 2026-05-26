@@ -165,14 +165,11 @@ public class Test {
     // PLAY MISSION
     // =========================
     public static void playMission(Superhero hero,Mission mission) {
+        
         System.out.println("\n=================================");
         System.out.println("MISSION: " + mission.GetMissionName());
         System.out.println("=================================");
-        System.out.println("\n1. Use aggression and physical force");
-        System.out.println("2. Use sneaking powers");
-        System.out.println("3. Create a device that remotely completes the task");
-        System.out.println("4. Converse with your animal friends");
-        System.out.println("5. Intercept the perpetrator from a high point");
+        getOptions();
         int choice = scan.nextInt();
         
         int heroPower = hero.GetStrength() + hero.GetStamina() + hero.GetIntelligence();
@@ -199,7 +196,7 @@ public class Test {
             }
             if(hero.GetWeakness1().equals("Darkness") || hero.GetWeakness2().equals("Darkness")){
                 hero.TakeDamage(50);
-                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly, by an additional 35 points");
             }
         }
         else if(choice == 4){
@@ -208,7 +205,7 @@ public class Test {
             }
             if(hero.GetWeakness1().equals("Animals") || hero.GetWeakness2().equals("Animals")){
                 hero.TakeDamage(50);
-                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly, by an additional 35 points");
             }
         }
         else if(choice == 5){
@@ -217,7 +214,7 @@ public class Test {
             }
             if(hero.GetWeakness1().equals("Heights") || hero.GetWeakness2().equals("Heights")){
                 hero.TakeDamage(50);
-                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly.");
+                System.out.println("Uh Oh. You picked an option that is related to your weakness! Your health goes down significantly, by an additional 35 points");
             }
         }
         if (heroPower >= mission.GetDifficulty()) {
@@ -237,47 +234,33 @@ public class Test {
         saveHeroStatus(hero.GetName(), hero.GetHealth());
     }
     public static Power assignPower(int lineNum) {
-
         try (BufferedReader br = new BufferedReader(new FileReader("choices/Powers.txt"))) {
-
             String line;
             int currentLine = 1;
-
             while ((line = br.readLine()) != null) {
-
                 if (currentLine == lineNum) {
-
                     String[] parts = line.split(",");
-
                     String name = parts[0];
                     boolean social = Boolean.parseBoolean(parts[1]);
                     int efficacy = Integer.parseInt(parts[2]);
-
                     return new Power(name, social, efficacy);
                 }
-
                 currentLine++;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
     public static Superhero assignHero(int lineNum) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("choices/Supers.txt"))) {
-
             String line;
             int currentLine = 1;
-
             while ((line = br.readLine()) != null) {
-
                 if (currentLine == lineNum) {
-
                     String[] parts = line.split(",");
-
                     String powerName = parts[0];
                     Boolean powerSocial = Boolean.valueOf(parts[1]);
                     int powerEfficacy = Integer.parseInt(parts[2]);
@@ -291,14 +274,12 @@ public class Test {
                     Power power = new Power(powerName, powerSocial, powerEfficacy);
                     return new Superhero(power, heroName, weakness1, weakness2, strength, stamina, intelligence, health);
                 }
-
                 currentLine++;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
     public static void getHeroStatus(){
@@ -308,6 +289,17 @@ public class Test {
                 if(Integer.parseInt(line) >= 350){
                     System.out.println("Congratulations! You are a very well qualified superhero!");
                 }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void getOptions(){
+        try(BufferedReader br = new BufferedReader(new FileReader("choices/options.txt"))){
+            String line;
+            while ((line = br.readLine()) != null){
+                System.out.println(line);
             }
         }
         catch(Exception e){
